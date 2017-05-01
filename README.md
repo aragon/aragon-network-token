@@ -51,7 +51,7 @@ Sale:
 - [AragonTokenSale.sol](/contracts/AragonTokenSale.sol): Implementation of the initial distribution of ANT.
 - [ANPlaceholder.sol](/contracts/ANPlaceholder.sol): Placeholder for the Aragon Network before its deployment.
 - [SaleWallet.sol](/contracts/SaleWallet.sol): Simple contract that will hold all funds until final block of the sale.
-- [MultiSigWallet.sol](/contracts/MultiSigWallet.sol): Gnosis multisig used for Aragon and community multisigs.
+- [MultisigWallet.sol](/contracts/MultisigWallet.sol): Gnosis multisig used for Aragon and community multisigs.
 
 ## Reviewers and audits
 
