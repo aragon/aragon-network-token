@@ -38,7 +38,7 @@ contract AragonTokenSale is Controller, SafeMath {
 
     event NewPresaleAllocation(address indexed holder, uint256 antAmount);
     event NewBuyer(address indexed holder, uint256 antAmount, uint256 etherAmount);
-
+    event CapRevealed(uint value, uint secret, address revealer);
 /// @dev There are several checks to make sure the parameters are acceptable
 /// @param _initialBlock The Block number in which the sale starts
 /// @param _finalBlock The Block number in which the sale ends
@@ -297,6 +297,8 @@ Price increases by the same delta in every stage change
            verify_cap(_cap, _cap_secure) {
 
     if (_cap > hardCap) throw;
+
+    CapRevealed(_cap, _cap_secure, msg.sender);
 
     if (totalCollected < _cap) {
       hardCap = _cap;
