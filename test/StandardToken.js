@@ -2,7 +2,8 @@
 
 const assertJump = require('./helpers/assertJump');
 var AragonTokenSaleTokenMock = artifacts.require("AragonTokenSaleTokenMock");
-var StandardToken = artifacts.require("zeppelin/token/StandardToken.sol");
+var TokenReceiverMock = artifacts.require("TokenReceiverMock");
+var StandardToken = artifacts.require("MiniMeToken.sol");
 
 contract('StandardToken', function(accounts) {
   let token;
@@ -65,4 +66,22 @@ contract('StandardToken', function(accounts) {
     }
     assert.fail('should have thrown before');
   });
+
+  it("should approve and call", async function() {
+    let receiver = await TokenReceiverMock.new()
+    await token.approveAndCall(receiver.address, 15, '0xbeef')
+
+    assert.equal(await receiver.tokenBalance(), 15, 'Should have transfered tokens under the hood')
+    assert.equal(await receiver.extraData(), '0xbeef', 'Should have correct extra data')
+  })
+
+  it("approve and call should throw when transferring more than balance", async function() {
+    let receiver = await TokenReceiverMock.new()
+    try {
+      let approveAndCall = await token.approveAndCall(receiver.address, 150, '0xbeef')
+    } catch (error) {
+      return assertJump(error);
+    }
+    assert.fail('should have thrown before');
+  })
 });
