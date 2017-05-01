@@ -261,7 +261,7 @@ Price increases by the same delta in every stage change
 
     if (totalCollected + msg.value > hardCap) throw; // If past hard cap, throw
 
-    uint256 boughtTokens = safeMul(msg.value, getPrice(getBlockNumber())); // Calculate how many tokens bought
+    uint256 boughtTokens = safeDiv(msg.value, getPrice(getBlockNumber())); // Calculate how many tokens bought
 
     if (!saleWallet.send(msg.value)) throw; // Send funds to multisig
     if (!token.generateTokens(_owner, boughtTokens)) throw; // Allocate tokens. This will fail after sale is finalized in case it is hidden cap finalized.
