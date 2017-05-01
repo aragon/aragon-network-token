@@ -1,4 +1,4 @@
-# Aragon Network Token [![Build Status](https://travis-ci.org/AragonOne/aragon-network-token.svg?branch=master)](https://travis-ci.org/AragonOne/aragon-network-token) ![Join our slack](https://aragon.chat/badge.svg) 
+# Aragon Network Token [![Build Status](https://travis-ci.org/aragon/aragon-network-token.svg?branch=master)](https://travis-ci.org/aragon/aragon-network-token) ![Join our slack](https://aragon.chat/badge.svg)
 
 <img src="rsc/ant_header.jpg"/>
 
