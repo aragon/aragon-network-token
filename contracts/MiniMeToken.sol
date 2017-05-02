@@ -157,8 +157,7 @@ contract MiniMeToken is ERC20, Controlled {
 
            // Alerts the token controller of the transfer
            if (isContract(controller)) {
-               if (!Controller(controller).onTransfer(_from, _to, _amount))
-               throw;
+               if (!Controller(controller).onTransfer(_from, _to, _amount)) throw;
            }
 
            // First update the balance array with the new value for the address
