@@ -92,7 +92,7 @@ contract MiniMeIrrevocableVestedToken is MiniMeToken, SafeMath {
     if (_vesting < _cliff) throw;
 
     if (!canCreateGrants[msg.sender]) throw;
-    if (grants[_to].length > 20) throw;   // To prevent a user being spammed and have his balance locked (out of gas attack when calculating vesting).
+    if (tokenGrantsCount(_to) > 20) throw;   // To prevent a user being spammed and have his balance locked (out of gas attack when calculating vesting).
 
     TokenGrant memory grant = TokenGrant(msg.sender, _value, _cliff, _vesting, _start);
     grants[_to].push(grant);
@@ -204,7 +204,7 @@ contract MiniMeIrrevocableVestedToken is MiniMeToken, SafeMath {
   // Useful for displaying purposes (not used in any logic calculations)
   function lastTokenIsTransferableDate(address holder) constant public returns (uint64 date) {
     date = uint64(now);
-    uint256 grantIndex = grants[holder].length;
+    uint256 grantIndex = tokenGrantsCount(holder);
     for (uint256 i = 0; i < grantIndex; i++) {
       date = max64(grants[holder][i].vesting, date);
     }
@@ -212,7 +212,7 @@ contract MiniMeIrrevocableVestedToken is MiniMeToken, SafeMath {
 
   // @dev How many tokens can a holder transfer at a point in time
   function transferableTokens(address holder, uint64 time) constant public returns (uint256) {
-    uint256 grantIndex = grants[holder].length;
+    uint256 grantIndex = tokenGrantsCount(holder);
 
     if (grantIndex == 0) return balanceOf(holder); // shortcut for holder without grants
 
