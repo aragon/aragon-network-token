@@ -1,6 +1,7 @@
 // Zeppelin tests for ERC20 StandardToken.
 
 const assertJump = require('./helpers/assertJump');
+const assertGas = require('./helpers/assertGas');
 var AragonTokenSaleTokenMock = artifacts.require("AragonTokenSaleTokenMock");
 var TokenReceiverMock = artifacts.require("TokenReceiverMock");
 var StandardToken = artifacts.require("MiniMeToken.sol");
@@ -80,7 +81,7 @@ contract('StandardToken', function(accounts) {
     try {
       let approveAndCall = await token.approveAndCall(receiver.address, 150, '0xbeef')
     } catch (error) {
-      return assertJump(error);
+      return assertGas(error);
     }
     assert.fail('should have thrown before');
   })
