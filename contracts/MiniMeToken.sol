@@ -2,7 +2,7 @@ pragma solidity ^0.4.8;
 
 import "./interface/Controlled.sol";
 import "./interface/Controller.sol";
-import "./interface/Receiver.sol";
+import "./interface/ApproveAndCallReceiver.sol";
 import "zeppelin/token/ERC20.sol";
 
 /*
@@ -235,7 +235,7 @@ contract MiniMeToken is ERC20, Controlled {
         //  `receiveApproval(address _from, uint256 _amount, address
         //  _tokenContract, bytes _extraData)` It is assumed that the call
         //  *should* succeed, otherwise the plain vanilla approve would be used
-        ApproveAndCallFallBack(_spender).receiveApproval(
+        ApproveAndCallReceiver(_spender).receiveApproval(
            msg.sender,
            _amount,
            this,

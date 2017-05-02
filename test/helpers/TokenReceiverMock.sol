@@ -1,9 +1,9 @@
 pragma solidity ^0.4.8;
 
-import '../../contracts/interface/Receiver.sol';
+import '../../contracts/interface/ApproveAndCallReceiver.sol';
 import "zeppelin/token/StandardToken.sol";
 
-contract TokenReceiverMock is ApproveAndCallFallBack {
+contract TokenReceiverMock is ApproveAndCallReceiver {
   bytes public extraData;
   uint public tokenBalance;
 
