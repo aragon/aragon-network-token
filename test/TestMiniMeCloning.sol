@@ -55,7 +55,7 @@ contract TestMiniMeCloning {
 
   function testRecurringClones() {
     MiniMeToken lastClone = clone1;
-    for (uint i = 0; i < 3; i++) {
+    for (uint i = 0; i < 10; i++) {
       lastClone = MiniMeToken(lastClone.createCloneToken("ANTn", 18, "ANTn", block.number, true));
     }
     lastClone.changeController(0xbeef); // so it doesn't ask this for callbacks
@@ -64,5 +64,20 @@ contract TestMiniMeCloning {
     Assert.equal(lastClone.balanceOfAt(this, baseBlock), 100, 'should be able to travel back in time');
   }
 
-  function testMultitransfer() { }
+  function testMultitransfer1() {
+    Assert.equal(token.balanceOf(this), 90, 'should have correct balance before');
+    token.transfer(0x32, 10);
+    Assert.equal(token.balanceOf(this), 80, 'should have correct balance before');
+  }
+
+  function testMultitransfer2() {
+    token.transfer(0x32, 10);
+    Assert.equal(token.balanceOf(this), 70, 'should have correct balance before');
+  }
+
+  function testMultitransfer3() {
+    token.transfer(0x32, 10);
+    Assert.equal(token.balanceOf(this), 60, 'should have correct balance before');
+    Assert.equal(token.balanceOfAt(this, baseBlock), 100, 'should be able to travel back in time');
+  }
 }
