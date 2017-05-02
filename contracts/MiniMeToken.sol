@@ -270,7 +270,7 @@ contract MiniMeToken is ERC20, Controlled {
         if ((balances[_owner].length == 0)
             || (balances[_owner][0].fromBlock > _blockNumber)) {
             if (address(parentToken) != 0) {
-                return parentToken.balanceOfAt(_owner, max(_blockNumber, parentSnapShotBlock));
+                return parentToken.balanceOfAt(_owner, min(_blockNumber, parentSnapShotBlock));
             } else {
                 // Has no parent
                 return 0;
@@ -295,7 +295,7 @@ contract MiniMeToken is ERC20, Controlled {
         if ((totalSupplyHistory.length == 0)
             || (totalSupplyHistory[0].fromBlock > _blockNumber)) {
             if (address(parentToken) != 0) {
-                return parentToken.totalSupplyAt(max(_blockNumber, parentSnapShotBlock));
+                return parentToken.totalSupplyAt(min(_blockNumber, parentSnapShotBlock));
             } else {
                 return 0;
             }
@@ -306,7 +306,7 @@ contract MiniMeToken is ERC20, Controlled {
         }
     }
 
-    function max(uint a, uint b) internal returns (uint) {
+    function min(uint a, uint b) internal returns (uint) {
       return a < b ? a : b;
     }
 
