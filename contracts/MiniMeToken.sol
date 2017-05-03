@@ -262,20 +262,15 @@ contract MiniMeToken is ERC20, Controlled {
     function balanceOfAt(address _owner, uint _blockNumber) constant
         returns (uint) {
 
-        // If the `_blockNumber` requested is before the genesis block for the
-        //  the token being queried, the value returned is 0
-        if (_blockNumber < creationBlock) {
-            return 0;
-
         // These next few lines are used when the balance of the token is
         //  requested before a check point was ever created for this token, it
         //  requires that the `parentToken.balanceOfAt` be queried at the
         //  genesis block for that token as this contains initial balance of
         //  this token
-        } else if ((balances[_owner].length == 0)
+        if ((balances[_owner].length == 0)
             || (balances[_owner][0].fromBlock > _blockNumber)) {
             if (address(parentToken) != 0) {
-                return parentToken.balanceOfAt(_owner, parentSnapShotBlock);
+                return parentToken.balanceOfAt(_owner, min(_blockNumber, parentSnapShotBlock));
             } else {
                 // Has no parent
                 return 0;
@@ -285,7 +280,6 @@ contract MiniMeToken is ERC20, Controlled {
         } else {
             return getValueAt(balances[_owner], _blockNumber);
         }
-
     }
 
     /// @notice Total amount of tokens at a specific `_blockNumber`.
@@ -293,20 +287,15 @@ contract MiniMeToken is ERC20, Controlled {
     /// @return The total amount of tokens at `_blockNumber`
     function totalSupplyAt(uint _blockNumber) constant returns(uint) {
 
-        // If the `_blockNumber` requested is before the genesis block for the
-        //  the token being queried, the value returned is 0
-        if (_blockNumber < creationBlock) {
-            return 0;
-
         // These next few lines are used when the totalSupply of the token is
         //  requested before a check point was ever created for this token, it
         //  requires that the `parentToken.totalSupplyAt` be queried at the
         //  genesis block for this token as that contains totalSupply of this
         //  token at this block number.
-        } else if ((totalSupplyHistory.length == 0)
+        if ((totalSupplyHistory.length == 0)
             || (totalSupplyHistory[0].fromBlock > _blockNumber)) {
             if (address(parentToken) != 0) {
-                return parentToken.totalSupplyAt(parentSnapShotBlock);
+                return parentToken.totalSupplyAt(min(_blockNumber, parentSnapShotBlock));
             } else {
                 return 0;
             }
@@ -315,6 +304,10 @@ contract MiniMeToken is ERC20, Controlled {
         } else {
             return getValueAt(totalSupplyHistory, _blockNumber);
         }
+    }
+
+    function min(uint a, uint b) internal returns (uint) {
+      return a < b ? a : b;
     }
 
 ////////////////
