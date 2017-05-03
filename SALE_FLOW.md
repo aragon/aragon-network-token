@@ -68,11 +68,17 @@ Disclaimer: Please do not send from exchanges.
 
 <img src="rsc/ant_buy.png"/>
 
-#### 6. sale.emergencyStopSale() – 43,864 gas
+#### 6. sale.revealCap()
+
+During the sale, Aragon can reveal the hidden cap and cap secret resulting in the hard cap of the contract being modified by this new cap.
+
+In case the cap is revealed and the sale contract has already raised an amount higher than the cap, the sale is automatically finalized.
+
+#### 7. sale.emergencyStopSale() – 43,864 gas
 
 After the sale is activated, Aragon Dev will be able to stop the sale for an emergency.
 
-#### 7. sale.restartSale() – 14,031 gas
+#### 8. sale.restartSale() – 14,031 gas
 
 After the sale has been stopped for an emergency and the sale is still ongoing, Aragon Dev will be able to restart it.
 
@@ -82,13 +88,13 @@ After the sale has ended, it cannot be restarted. The sale can end in a stopped 
 
 The after sale period is considered from the final block (inclusive) until the sale contract is destroyed.
 
-#### 8. sale.finalizeSale() – 105,348 gas
+#### 9. sale.finalizeSale() – 105,348 gas
 
 This method will mint an additional 3/7 of tokens so at the end of the sale Aragon Dev will own 30% of all the ANT supply.
 
 In the process of doing so, it will make the ANPlaceholder the controller of the token contract. Which will make the token supply be constant until the network is deployed and it implements a new minting policy.
 
-#### 9. sale.deployNetwork() – 22, 338 gas
+#### 10. sale.deployNetwork() – 22, 338 gas
 
 After the sale is finalized, the community multisig will be able to provide the address of the already deployed Aragon Network.
 
