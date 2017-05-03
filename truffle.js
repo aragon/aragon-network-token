@@ -27,8 +27,11 @@ module.exports = {
    },
     ropsten: {
       network_id: 3,
-      provider: ropstenProvider,
-      gas: 4.712e6,
+      host: 'localhost',
+      port: 8545,
+      from: '0xfCeA9C5D4967956d4b209f6b1E9D2162Ce96149b',
+      //provider: ropstenProvider,
+      gas: 4.7e6,
     },
     kovan: {
       network_id: 42,

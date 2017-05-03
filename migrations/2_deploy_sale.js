@@ -5,14 +5,15 @@ var ANT = artifacts.require("ANT");
 var MultiSigWallet = artifacts.require("MultiSigWallet");
 var SaleWallet = artifacts.require("SaleWallet");
 
+
 module.exports = function(deployer, network, accounts) {
   // if (network.indexOf('dev') > -1) return // dont deploy on tests
 
-  const aragonMs = accounts[0]
-  const communityMs = accounts[0]
+  const aragonMs = '0x4d39e11903fb14c22e8d28ebb00b6b4c88a253b9' // accounts[0]
+  const communityMs = '0x4d39e11903fb14c22e8d28ebb00b6b4c88a253b9' //accounts[0]
 
-  const initialBlock = 1014520
-  const finalBlock = 1014550
+  const initialBlock = 856730
+  const finalBlock = 856750
 
   // cap is 1 eth for secret 1
 
@@ -34,6 +35,7 @@ module.exports = function(deployer, network, accounts) {
           return ANT.new(factory.address)
         }).then(a => {
           ant = a
+          console.log('ANT:', ant.address)
           return ant.changeController(sale.address)
         })
         .then(() => {
@@ -46,7 +48,8 @@ module.exports = function(deployer, network, accounts) {
           return ANPlaceholder.new(sale.address, ant.address)
         })
         .then(networkPlaceholder => {
-          return sale.setANT(ant.address, networkPlaceholder.address, wallet.address)
+          console.log('Placeholder:', networkPlaceholder.address)
+          console.log(sale.setANT.request(ant.address, networkPlaceholder.address, wallet.address))
         })
     })
 };
