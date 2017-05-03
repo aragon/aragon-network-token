@@ -298,11 +298,10 @@ Price increases by the same delta in every stage change
 
     if (_cap > hardCap) throw;
 
+    hardCap = _cap;
     CapRevealed(_cap, _cap_secure, msg.sender);
 
-    if (totalCollected < _cap) {
-      hardCap = _cap;
-    } else {
+    if (totalCollected + dust >= hardCap) {
       doFinalizeSale(_cap, _cap_secure);
     }
   }
