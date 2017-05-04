@@ -127,6 +127,7 @@ Price increases by the same delta in every stage change
     if (token.totalSupply() > 0) throw; // token is empty
     if (saleWallet.finalBlock() != finalBlock) throw; // final blocks must match
     if (saleWallet.multisig() != aragonDevMultisig) throw; // receiving wallet must match
+    if (saleWallet.tokenSale() != address(this)) throw; // watched token sale must be self
 
     // Contract activates sale as all requirements are ready
     doActivateSale(this);

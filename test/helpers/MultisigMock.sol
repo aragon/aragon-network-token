@@ -10,7 +10,7 @@ contract MultisigMock {
 
     AragonTokenSale s = AragonTokenSale(sale);
     token.setCanCreateGrants(sale, true);
-    s.setANT(token, networkPlaceholder, new SaleWallet(s.aragonDevMultisig(), s.finalBlock()));
+    s.setANT(token, networkPlaceholder, new SaleWallet(s.aragonDevMultisig(), s.finalBlock(), sale));
   }
 
   function activateSale(address sale) {

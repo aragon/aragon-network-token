@@ -13,7 +13,7 @@ contract AragonTokenSaleTokenMock is AragonTokenSaleMock {
       ANPlaceholder networkPlaceholder = new ANPlaceholder(this, token);
       token.changeController(address(this));
 
-      setANT(token, networkPlaceholder, new SaleWallet(msg.sender, 20));
+      setANT(token, networkPlaceholder, new SaleWallet(msg.sender, 20, address(this)));
       allocatePresaleTokens(initialAccount, initialBalance, uint64(now), uint64(now));
       activateSale();
       setMockedBlockNumber(21);

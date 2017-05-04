@@ -9,15 +9,14 @@ var SaleWallet = artifacts.require("SaleWallet");
 module.exports = function(deployer, network, accounts) {
   // if (network.indexOf('dev') > -1) return // dont deploy on tests
 
-  const aragonMs = '0x4d39e11903fb14c22e8d28ebb00b6b4c88a253b9' // accounts[0]
-  const communityMs = '0x4d39e11903fb14c22e8d28ebb00b6b4c88a253b9' //accounts[0]
+  const aragonMs = accounts[0]
+  const communityMs = accounts[0]
 
-  const initialBlock = 856730
-  const finalBlock = 856750
+  const initialBlock = 1250850
+  const finalBlock = 1252850
 
   // cap is 1 eth for secret 1
 
-  deployer.deploy(SaleWallet, aragonMs, finalBlock)
   deployer.deploy(MiniMeTokenFactory);
   deployer.deploy(AragonTokenSale, initialBlock, finalBlock, aragonMs, communityMs, 100, 66, 2, '0xdaa1cf71fb601ffe59f8ee702b6597cff2aba8d7a3c59f6f476f9afe353ba7b6')
     .then(() => {
@@ -28,10 +27,6 @@ module.exports = function(deployer, network, accounts) {
         })
         .then(s => {
           sale = s
-          return SaleWallet.deployed()
-        })
-        .then(w => {
-          wallet = w
           return ANT.new(factory.address)
         }).then(a => {
           ant = a
@@ -47,8 +42,13 @@ module.exports = function(deployer, network, accounts) {
         .then(() => {
           return ANPlaceholder.new(sale.address, ant.address)
         })
-        .then(networkPlaceholder => {
+        .then(n => {
+          networkPlaceholder = n
           console.log('Placeholder:', networkPlaceholder.address)
+          return SaleWallet.new(aragonMs, finalBlock, sale.address)
+        })
+        .then(wallet => {
+          console.log('Wallet:', wallet.address)
           console.log(sale.setANT.request(ant.address, networkPlaceholder.address, wallet.address))
         })
     })
