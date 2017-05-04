@@ -8,14 +8,13 @@ Both use Gnosis Multisig at commit [25fba5](https://github.com/ConsenSys/gnosis-
 
 ## AragonDev Multisig – Café Latte [0xcafe1a77e84698c83ca8931f54a755176ef75f2c](https://etherscan.io/address/0xcafe1a77e84698c83ca8931f54a755176ef75f2c)
 
-#### Required signatures: 2/4
+#### Required signatures: 2/3
 
 #### Signers:
 
 - Luis Cuende, Aragon Project Lead. [0xddc1b51b67dabd408b224d0f7dfcc93ec4b06265](https://etherscan.io/address/0xddc1b51b67dabd408b224d0f7dfcc93ec4b06265) – [Proof](https://etherscan.io/tx/0xc7b285395c0cbf09599ffac4aa4a05bced65522994fc94597456fadc7c6c1d3f)
 - Jorge Izquierdo, Aragon Tech Lead. [0x4838Eab6F43841E0D233Db4CeA47BD64F614f0c5](https://etherscan.io/address/0x4838eab6f43841e0d233db4cea47bd64f614f0c5) – [Proof](https://etherscan.io/tx/0x5aaeb2d0361dbdf3b4ecadad1b49c239eb1b3b5e1cf973f6a4597ad56edc47b9).
 - Community Multisig – [0xbeefbeef03c7e5a1c29e0aa675f8e16aee0a5fad](https://etherscan.io/address/0xbeefbeef03c7e5a1c29e0aa675f8e16aee0a5fad)
-- Recovery address, recoverable only by both Luis and Jorge – TBD – Pending proof by Jorge and Luis.
 
 
 #### Responsibilities
@@ -25,10 +24,9 @@ Both use Gnosis Multisig at commit [25fba5](https://github.com/ConsenSys/gnosis-
 
 #### Rationale
 
-- Even though it is a 2/4 multisig it really is a 2/3, because the recovery key can only be constructed if Luis and Jorge get together to do so. No one can individually recover it, not even the undisclosed trusted person that will be the keeper of the hardware wallet containing the key. It is only as a security measure in the very unfortunate case that either Jorge or Luis lose their key (they will be losing access to all their ANT).
 - The decision to introduce the Community Multisig is that in case of a disagreement between Jorge or Luis, no one can extort the other part into locking the multisig forever. With support from the Community Multisig, whoever has the project and community best interests at heart and can convince the community, will be able to kick the other founder out of the multisig, and the project will continue its course.
 
-
+- Also, if Luis or Jorge were to lose their access to their key, the community multisig could be used to restore access to another key.
 
 ## Community multisig – Beef beef [0xbeefbeef03c7e5a1c29e0aa675f8e16aee0a5fad](https://etherscan.io/address/0xbeefbeef03c7e5a1c29e0aa675f8e16aee0a5fad)
 
