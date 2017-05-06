@@ -208,6 +208,7 @@ contract MiniMeIrrevocableVestedToken is MiniMeToken, SafeMath {
     for (uint256 i = 0; i < grantIndex; i++) {
       date = max64(grants[holder][i].vesting, date);
     }
+    return date;
   }
 
   // @dev How many tokens can a holder transfer at a point in time
