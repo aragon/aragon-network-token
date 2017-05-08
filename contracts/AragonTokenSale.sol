@@ -348,7 +348,6 @@ Price increases by the same delta in every stage change
            public {
 
     networkPlaceholder.changeController(networkAddress);
-    suicide(networkAddress);
   }
 
   function setAragonDevMultisig(address _newMultisig)

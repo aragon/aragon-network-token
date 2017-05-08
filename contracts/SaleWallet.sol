@@ -35,6 +35,6 @@ contract SaleWallet {
   }
 
   function doWithdraw() internal {
-    suicide(multisig);
+    if (!multisig.send(this.balance)) throw;
   }
 }
