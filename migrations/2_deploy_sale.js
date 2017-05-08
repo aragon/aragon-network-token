@@ -12,8 +12,8 @@ module.exports = function(deployer, network, accounts) {
   const aragonMs = accounts[0]
   const communityMs = accounts[0]
 
-  const initialBlock = 1250850
-  const finalBlock = 1252850
+  const initialBlock = 890541
+  const finalBlock = 891461
 
   // cap is 1 eth for secret 1
 
@@ -49,7 +49,16 @@ module.exports = function(deployer, network, accounts) {
         })
         .then(wallet => {
           console.log('Wallet:', wallet.address)
-          console.log(sale.setANT.request(ant.address, networkPlaceholder.address, wallet.address))
+          if (aragonMs != accounts[0]) {
+            console.log(sale.setANT.request(ant.address, networkPlaceholder.address, wallet.address))
+            return
+          } else {
+            console.log('Test mode, setting ANT')
+            return sale.setANT(ant.address, networkPlaceholder.address, wallet.address)
+          }
+        })
+        .then(() => {
+          return sale.activateSale()
         })
     })
 };
