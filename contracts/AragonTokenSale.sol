@@ -112,7 +112,8 @@ Price increases by the same delta in every stage change
            non_zero_address(_token)
            non_zero_address(_networkPlaceholder)
            non_zero_address(_saleWallet)
-           only(aragonDevMultisig) {
+           only(aragonDevMultisig)
+           public {
 
     // Assert that the function hasn't been called before, as activate will happen at the end
     if (activated[this]) throw;
@@ -136,7 +137,8 @@ Price increases by the same delta in every stage change
   // @notice Certain addresses need to call the activate function prior to the sale opening block.
   // This proves that they have checked the sale contract is legit, as well as proving
   // the capability for those addresses to interact with the contract.
-  function activateSale() {
+  function activateSale()
+           public {
     doActivateSale(msg.sender);
   }
 
@@ -149,7 +151,7 @@ Price increases by the same delta in every stage change
 
   // @notice Whether the needed accounts have activated the sale.
   // @return Is sale activated
-  function isActivated() constant returns (bool) {
+  function isActivated() constant public returns (bool) {
     return activated[this] && activated[aragonDevMultisig] && activated[communityMultisig];
   }
 
@@ -157,7 +159,7 @@ Price increases by the same delta in every stage change
   // @param _blockNumber the block for which the price is requested
   // @return Number of wei-ANT for 1 wei
   // If sale isn't ongoing for that block, returns 0.
-  function getPrice(uint _blockNumber) constant returns (uint256) {
+  function getPrice(uint _blockNumber) constant public returns (uint256) {
     if (_blockNumber < initialBlock || _blockNumber >= finalBlock) return 0;
 
     return priceForStage(stageForBlock(_blockNumber));
@@ -166,7 +168,7 @@ Price increases by the same delta in every stage change
   // @notice Get what the stage is for a given blockNumber
   // @param _blockNumber: Block number
   // @return The sale stage for that block. Stage is between 0 and (priceStages - 1)
-  function stageForBlock(uint _blockNumber) constant returns (uint8) {
+  function stageForBlock(uint _blockNumber) constant internal returns (uint8) {
     uint blockN = safeSub(_blockNumber, initialBlock);
     uint totalBlocks = safeSub(finalBlock, initialBlock);
 
@@ -177,7 +179,7 @@ Price increases by the same delta in every stage change
   // @param _stage: Stage number
   // @return Price in wei for that stage.
   // If sale stage doesn't exist, returns 0.
-  function priceForStage(uint8 _stage) constant returns (uint256) {
+  function priceForStage(uint8 _stage) constant internal returns (uint256) {
     if (_stage >= priceStages) return 0;
     uint priceDifference = safeSub(initialPrice, finalPrice);
     uint stageDelta = safeDiv(priceDifference, uint(priceStages - 1));
@@ -193,7 +195,8 @@ Price increases by the same delta in every stage change
            only_before_sale_activation
            only_before_sale
            non_zero_address(_receiver)
-           only(aragonDevMultisig) {
+           only(aragonDevMultisig)
+           public {
 
     if (_amount > 10 ** 24) throw; // 1 million ANT. No presale partner will have more than this allocated. Prevent overflows.
 
@@ -208,7 +211,7 @@ Price increases by the same delta in every stage change
 /// `_owner`. Payable is a required solidity modifier for functions to receive
 /// ether, without this modifier functions will throw if ether is sent to them
 
-  function () payable {
+  function () public payable {
     return doPayment(msg.sender);
   }
 
@@ -220,7 +223,7 @@ Price increases by the same delta in every stage change
 /// have the tokens created in an address of their choosing
 /// @param _owner The address that will hold the newly created tokens
 
-  function proxyPayment(address _owner) payable returns (bool) {
+  function proxyPayment(address _owner) payable public returns (bool) {
     doPayment(_owner);
     return true;
   }
@@ -231,7 +234,7 @@ Price increases by the same delta in every stage change
 /// @param _to The destination of the transfer
 /// @param _amount The amount of the transfer
 /// @return False if the controller does not authorize the transfer
-  function onTransfer(address _from, address _to, uint _amount) returns (bool) {
+  function onTransfer(address _from, address _to, uint _amount) public returns (bool) {
     // Until the sale is finalized, only allows transfers originated by the sale contract.
     // When finalizeSale is called, this function will stop being called and will always be true.
     return _from == address(this);
@@ -243,7 +246,7 @@ Price increases by the same delta in every stage change
 /// @param _spender The spender in the `approve()` call
 /// @param _amount The amount in the `approve()` call
 /// @return False if the controller does not authorize the approval
-  function onApprove(address _owner, address _spender, uint _amount) returns (bool) {
+  function onApprove(address _owner, address _spender, uint _amount) public returns (bool) {
     // No approve/transferFrom during the sale
     return false;
   }
@@ -277,7 +280,8 @@ Price increases by the same delta in every stage change
   function emergencyStopSale()
            only_sale_activated
            only_sale_not_stopped
-           only(aragonDevMultisig) {
+           only(aragonDevMultisig)
+           public {
 
     saleStopped = true;
   }
@@ -287,7 +291,8 @@ Price increases by the same delta in every stage change
   function restartSale()
            only_during_sale_period
            only_sale_stopped
-           only(aragonDevMultisig) {
+           only(aragonDevMultisig)
+           public {
 
     saleStopped = false;
   }
@@ -295,7 +300,8 @@ Price increases by the same delta in every stage change
   function revealCap(uint256 _cap, uint256 _cap_secure)
            only_during_sale_period
            only_sale_activated
-           verify_cap(_cap, _cap_secure) {
+           verify_cap(_cap, _cap_secure)
+           public {
 
     if (_cap > hardCap) throw;
 
@@ -311,7 +317,8 @@ Price increases by the same delta in every stage change
   // @dev Transfers the token controller power to the ANPlaceholder.
   function finalizeSale(uint256 _cap, uint256 _cap_secure)
            only_after_sale
-           only(aragonDevMultisig) {
+           only(aragonDevMultisig)
+           public {
 
     doFinalizeSale(_cap, _cap_secure);
   }
@@ -337,7 +344,8 @@ Price increases by the same delta in every stage change
   function deployNetwork(address networkAddress)
            only_finalized_sale
            non_zero_address(networkAddress)
-           only(communityMultisig) {
+           only(communityMultisig)
+           public {
 
     networkPlaceholder.changeController(networkAddress);
     suicide(networkAddress);
@@ -345,27 +353,29 @@ Price increases by the same delta in every stage change
 
   function setAragonDevMultisig(address _newMultisig)
            non_zero_address(_newMultisig)
-           only(aragonDevMultisig) {
+           only(aragonDevMultisig)
+           public {
 
     aragonDevMultisig = _newMultisig;
   }
 
   function setCommunityMultisig(address _newMultisig)
            non_zero_address(_newMultisig)
-           only(communityMultisig) {
+           only(communityMultisig)
+           public {
 
     communityMultisig = _newMultisig;
   }
 
-  function getBlockNumber() constant returns (uint) {
+  function getBlockNumber() constant internal returns (uint) {
     return block.number;
   }
 
-  function computeCap(uint256 _cap, uint256 _cap_secure) constant returns (bytes32) {
+  function computeCap(uint256 _cap, uint256 _cap_secure) constant public returns (bytes32) {
     return sha3(_cap, _cap_secure);
   }
 
-  function isValidCap(uint256 _cap, uint256 _cap_secure) constant returns (bool) {
+  function isValidCap(uint256 _cap, uint256 _cap_secure) constant public returns (bool) {
     return computeCap(_cap, _cap_secure) == capCommitment;
   }
 

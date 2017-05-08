@@ -18,7 +18,7 @@ contract AragonTokenSaleMock is AragonTokenSale {
 
   }
 
-  function getBlockNumber() constant returns (uint) {
+  function getBlockNumber() internal constant returns (uint) {
     return mock_blockNumber;
   }
 

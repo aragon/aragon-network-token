@@ -65,12 +65,14 @@ contract MiniMeIrrevocableVestedToken is MiniMeToken, SafeMath {
   // @dev Add canTransfer modifier before allowing transfer and transferFrom to go through
   function transfer(address _to, uint _value)
            canTransfer(msg.sender, _value)
+           public
            returns (bool success) {
     return super.transfer(_to, _value);
   }
 
   function transferFrom(address _from, address _to, uint _value)
            canTransfer(_from, _value)
+           public
            returns (bool success) {
     return super.transferFrom(_from, _to, _value);
   }
@@ -84,7 +86,7 @@ contract MiniMeIrrevocableVestedToken is MiniMeToken, SafeMath {
     uint256 _value,
     uint64 _start,
     uint64 _cliff,
-    uint64 _vesting) {
+    uint64 _vesting) public {
 
     // Check start, cliff and vesting are properly order to ensure correct functionality of the formula.
     if (_cliff < _start) throw;
@@ -103,7 +105,7 @@ contract MiniMeIrrevocableVestedToken is MiniMeToken, SafeMath {
   }
 
   function setCanCreateGrants(address _addr, bool _allowed)
-           onlyVestingWhitelister {
+           onlyVestingWhitelister public {
     doSetCanCreateGrants(_addr, _allowed);
   }
 
@@ -112,23 +114,23 @@ contract MiniMeIrrevocableVestedToken is MiniMeToken, SafeMath {
     canCreateGrants[_addr] = _allowed;
   }
 
-  function changeVestingWhitelister(address _newWhitelister) onlyVestingWhitelister {
+  function changeVestingWhitelister(address _newWhitelister) onlyVestingWhitelister public {
     doSetCanCreateGrants(vestingWhitelister, false);
     vestingWhitelister = _newWhitelister;
     doSetCanCreateGrants(vestingWhitelister, true);
   }
 
   // @dev Not allow token grants
-  function revokeTokenGrant(address _holder, uint _grantId) {
+  function revokeTokenGrant(address _holder, uint _grantId) public {
     throw;
   }
 
   //
-  function tokenGrantsCount(address _holder) constant returns (uint index) {
+  function tokenGrantsCount(address _holder) constant public returns (uint index) {
     return grants[_holder].length;
   }
 
-  function tokenGrant(address _holder, uint _grantId) constant returns (address granter, uint256 value, uint256 vested, uint64 start, uint64 cliff, uint64 vesting) {
+  function tokenGrant(address _holder, uint _grantId) constant public returns (address granter, uint256 value, uint256 vested, uint64 start, uint64 cliff, uint64 vesting) {
     TokenGrant grant = grants[_holder][_grantId];
 
     granter = grant.granter;
