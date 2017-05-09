@@ -122,4 +122,58 @@ contract TestTokenSaleCap {
     Assert.equal(ERC20(sale.token()).balanceOf(address(ms)), 30 finney, 'Should have correct balance after ending sale');
     Assert.equal(ERC20(sale.token()).totalSupply(), 100 finney, 'Should have correct supply after ending sale');
   }
+
+  function testTokensAreTransferrableAfterSale() {
+    MultisigMock ms = new MultisigMock();
+    AragonTokenSaleMock sale = new AragonTokenSaleMock(10, 20, address(ms), address(ms), 3, 1, 2);
+    ms.deployAndSetANT(sale);
+    ms.activateSale(sale);
+
+    Assert.equal(ANT(sale.token()).controller(), address(sale), "Sale is controller during sale");
+
+    sale.setMockedBlockNumber(12);
+    sale.proxyPayment.value(15 finney)(address(this));
+    sale.setMockedBlockNumber(22);
+    ms.finalizeSale(sale);
+
+    Assert.equal(ANT(sale.token()).controller(), sale.networkPlaceholder(), "Network placeholder is controller after sale");
+
+    ERC20(sale.token()).transfer(0x1, 10 finney);
+    Assert.equal(ERC20(sale.token()).balanceOf(0x1), 10 finney, 'Should have correct balance after receiving tokens');
+  }
+
+  function testFundsAreTransferrableAfterSale() {
+    MultisigMock ms = new MultisigMock();
+    AragonTokenSaleMock sale = new AragonTokenSaleMock(1000000, 60000000, address(ms), address(ms), 3, 1, 2);
+    ms.deployAndSetANT(sale);
+    ms.activateSale(sale);
+
+    Assert.equal(ANT(sale.token()).controller(), address(sale), "Sale is controller during sale");
+
+    sale.setMockedBlockNumber(1000000);
+    sale.proxyPayment.value(15 finney)(address(this));
+    sale.setMockedBlockNumber(60000000);
+    ms.finalizeSale(sale);
+
+    ms.withdrawWallet(sale);
+    Assert.equal(ms.balance, 15 finney, "Funds are collected after sale");
+    Assert.equal(sale.saleWallet().balance, 0 finney, "Funds shouldnt have been transfered");
+  }
+
+  function testFundsAreLockedDuringSale() {
+    MultisigMock ms = new MultisigMock();
+    AragonTokenSaleMock sale = new AragonTokenSaleMock(1000000, 60000000, address(ms), address(ms), 3, 1, 2);
+    ms.deployAndSetANT(sale);
+    ms.activateSale(sale);
+
+    Assert.equal(ANT(sale.token()).controller(), address(sale), "Sale is controller during sale");
+
+    sale.setMockedBlockNumber(1000000);
+    sale.proxyPayment.value(15 finney)(address(this));
+    sale.setMockedBlockNumber(60000000);
+
+    ms.withdrawWallet(sale);
+    Assert.equal(ms.balance, 0 finney, "Funds shouldnt have been transfered");
+    Assert.equal(sale.saleWallet().balance, 15 finney, "Funds shouldnt have been transfered");
+  }
 }

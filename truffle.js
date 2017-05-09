@@ -25,6 +25,10 @@ module.exports = {
      port: 8546,
      gas: 8e7,
    },
+   mainnet: {
+     network_id: 1,
+     provider: new HDWalletProvider(mnemonic, 'http://localhost:8545'),
+   },
     ropsten: {
       network_id: 3,
       /*

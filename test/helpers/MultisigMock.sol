@@ -29,6 +29,10 @@ contract MultisigMock {
     finalizeSale(sale, AragonTokenSaleMock(sale).mock_hiddenCap());
   }
 
+  function withdrawWallet(address sale) {
+    SaleWallet(AragonTokenSale(sale).saleWallet()).withdraw();
+  }
+
   function finalizeSale(address sale, uint256 cap) {
     AragonTokenSale(sale).finalizeSale(cap, AragonTokenSaleMock(sale).mock_capSecret());
   }

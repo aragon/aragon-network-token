@@ -2,7 +2,6 @@ var AragonTokenSale = artifacts.require("AragonTokenSale");
 var MiniMeTokenFactory = artifacts.require("MiniMeTokenFactory");
 var ANPlaceholder = artifacts.require("ANPlaceholder");
 var ANT = artifacts.require("ANT");
-var MultiSigWallet = artifacts.require("MultiSigWallet");
 var SaleWallet = artifacts.require("SaleWallet");
 
 
@@ -12,8 +11,8 @@ module.exports = function(deployer, network, accounts) {
   const aragonMs = accounts[0]
   const communityMs = accounts[0]
 
-  const initialBlock = 890541
-  const finalBlock = 891461
+  const initialBlock = 1335999
+  const finalBlock = 1337499
 
   // cap is 1 eth for secret 1
 

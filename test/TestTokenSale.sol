@@ -172,6 +172,45 @@ contract TestTokenSale {
     Assert.equal(ERC20(sale.token()).balanceOf(0x1), 10 finney, 'Should have correct balance after receiving tokens');
   }
 
+  function testFundsAreTransferrableAfterSale() {
+    MultisigMock ms = new MultisigMock();
+    AragonTokenSaleMock sale = new AragonTokenSaleMock(10, 20, address(ms), address(ms), 3, 1, 2);
+    ms.deployAndSetANT(sale);
+    ms.activateSale(sale);
+
+    Assert.equal(ANT(sale.token()).controller(), address(sale), "Sale is controller during sale");
+
+    sale.setMockedBlockNumber(12);
+    sale.proxyPayment.value(15 finney)(address(this));
+    sale.setMockedBlockNumber(22);
+    ms.finalizeSale(sale);
+
+    ms.withdrawWallet(sale);
+    Assert.equal(ms.balance, 15 finney, "Funds are collected after sale");
+  }
+
+  function testFundsAreLockedDuringSale() {
+    TestTokenSale(throwProxy).throwsWhenTransferingFundsDuringSale();
+    throwProxy.assertThrows("Should have thrown transferring funds during sale");
+  }
+
+  function throwsWhenTransferingFundsDuringSale() {
+    MultisigMock ms = new MultisigMock();
+    AragonTokenSaleMock sale = new AragonTokenSaleMock(10, 20, address(ms), address(ms), 3, 1, 2);
+    ms.deployAndSetANT(sale);
+    ms.activateSale(sale);
+
+    Assert.equal(ANT(sale.token()).controller(), address(sale), "Sale is controller during sale");
+
+    sale.setMockedBlockNumber(12);
+    sale.proxyPayment.value(15 finney)(address(this));
+    sale.setMockedBlockNumber(22);
+    ms.finalizeSale(sale);
+
+    ms.withdrawWallet(sale);
+    Assert.equal(ms.balance, 15 finney, "Funds are collected after sale");
+  }
+
   function testNetworkDeployment() {
     MultisigMock devMultisig = new MultisigMock();
     MultisigMock communityMultisig = new MultisigMock();
