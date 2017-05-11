@@ -35,13 +35,13 @@ Both use Gnosis Multisig at commit [25fba5](https://github.com/ConsenSys/gnosis-
 #### Signers
 
 - AragonDev multisig. [0xcafe1a77e84698c83ca8931f54a755176ef75f2c](https://etherscan.io/address/0xcafe1a77e84698c83ca8931f54a755176ef75f2c)
-- Joe Urgo, CEO [Sourcerers](http://sourcerers.io) & [Dapp daily](https://dappdaily.com) author. [0x75d83a0ae1543fd4b49594023977e1daf5a954c5](https://etherscan.io/address/0x75d83a0ae1543fd4b49594023977e1daf5a954c5) – [Proof](https://etherscan.io/tx/0x796538ed7dd4d76953b045c6341129f8976fefeb160de72618dc28c50138cc5a)
+- Joe Urgo, CEO [Sourcerers](http://sourcerers.io) & [Dapp daily](https://dappdaily.com) author. [0x75d83a0ae1543fd4b49594023977e1daf5a954c5](https://etherscan.io/address/0x75d83a0ae1543fd4b49594023977e1daf5a954c5) – [Proof](https://etherscan.io/tx/0x796538ed7dd4d76953b045c6341129f8976fefeb160de72618dc28c50138cc5a).
+- Kenny Rowe, COO of Dai Foundation. Governance at [MakerDAO](http://makerdao.com). [0x939428c249a738990d4fb938509a5c43f3ecedcf](https://etherscan.io/address/0x939428c249a738990d4fb938509a5c43f3ecedcf) – [Proof](https://etherscan.io/tx/0x2aea9d83c32328932bef2df2790539ddbcb489f140854d4cc2c063176135a6d6).
+- Jake Brukhman, Cofounder of [CoinFund](http://coinfund.io). [0xD4bE3593eb07F97de7E27bE56Ff7aD2f27a72364](https://etherscan.io/address/0xD4bE3593eb07F97de7E27bE56Ff7aD2f27a72364) – [Proof](https://etherscan.io/tx/).
 
 #### Pending signers
 
 - Pending 1
-- Pending 2
-- Pending 3
 
 #### Responsibilities
 
