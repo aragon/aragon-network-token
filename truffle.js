@@ -5,7 +5,7 @@ var HDWalletProvider = require('truffle-hdwallet-provider');
 
 const mnemonic = process.env.TEST_MNETONIC || 'burger burger burger burger burger burger burger burger burger burger burger burger';
 const ropstenProvider = new HDWalletProvider(mnemonic, 'https://ropsten.infura.io/');
-const kovanProvider = new HDWalletProvider(mnemonic, 'https://kovan.aragon.one');
+const kovanProvider = new HDWalletProvider(mnemonic, 'https://kovan.infura.io');
 
 module.exports = {
   networks: {
@@ -27,7 +27,10 @@ module.exports = {
    },
    mainnet: {
      network_id: 1,
-     provider: new HDWalletProvider(mnemonic, 'http://localhost:8545'),
+     from: '0x7f478213dD4A4df6016922aA47b860f0Bdf50075',
+     host: 'localhost',
+     port: 8545,
+     gas: 4e6,
    },
     ropsten: {
       network_id: 3,

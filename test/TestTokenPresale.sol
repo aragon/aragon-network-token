@@ -143,6 +143,7 @@ contract TestTokenPresale {
     deployAndSetANT(sale);
     sale.allocatePresaleTokens(0x1, 100 finney, uint64(now + 12 weeks), uint64(now + 24 weeks));
     sale.allocatePresaleTokens(0x2, 30 finney, uint64(now + 12 weeks), uint64(now + 24 weeks));
+    sale.allocatePresaleTokens(0x2, 6 finney, uint64(now + 8 weeks), uint64(now + 24 weeks));
     sale.allocatePresaleTokens(address(this), 20 finney, uint64(now + 12 weeks), uint64(now + 24 weeks));
     Assert.equal(ERC20(sale.token()).balanceOf(0x1), 100 finney, 'Should have correct balance after allocation');
     Assert.equal(MiniMeIrrevocableVestedToken(sale.token()).transferableTokens(0x1, uint64(now)), 0, 'Should have 0 tokens transferable now');
@@ -151,7 +152,14 @@ contract TestTokenPresale {
     Assert.equal(MiniMeIrrevocableVestedToken(sale.token()).transferableTokens(0x1, uint64(now + 18 weeks)), 75 finney, 'Should have some tokens transferable during vesting');
     Assert.equal(MiniMeIrrevocableVestedToken(sale.token()).transferableTokens(0x1, uint64(now + 21 weeks)), 87500 szabo, 'Should have some tokens transferable during vesting');
     Assert.equal(MiniMeIrrevocableVestedToken(sale.token()).transferableTokens(0x1, uint64(now + 24 weeks)), 100 finney, 'Should have all tokens transferable after vesting');
-    Assert.equal(ERC20(sale.token()).totalSupply(), 150 finney, 'Should have correct supply after allocation');
+
+    Assert.equal(MiniMeIrrevocableVestedToken(sale.token()).transferableTokens(0x2, uint64(now)), 0, 'Should have all tokens transferable after vesting');
+    Assert.equal(MiniMeIrrevocableVestedToken(sale.token()).transferableTokens(0x2, uint64(now + 8 weeks)), 2 finney, 'Should have all tokens transferable after vesting');
+    Assert.equal(MiniMeIrrevocableVestedToken(sale.token()).transferableTokens(0x2, uint64(now + 12 weeks)), 18 finney, 'Should have all tokens transferable after vesting');
+    Assert.equal(MiniMeIrrevocableVestedToken(sale.token()).transferableTokens(0x2, uint64(now + 24 weeks)), 36 finney, 'Should have all tokens transferable after vesting');
+    Assert.equal(MiniMeIrrevocableVestedToken(sale.token()).transferableTokens(0x1, uint64(now + 24 weeks)), 100 finney, 'Should have all tokens transferable after vesting');
+
+    Assert.equal(ERC20(sale.token()).totalSupply(), 156 finney, 'Should have correct supply after allocation');
 
     Assert.equal(ERC20(sale.token()).balanceOf(this), 20 finney, 'Should have correct balance');
     TestTokenPresale(throwProxy).throwsWhenTransferingPresaleTokensBeforeCliff(sale.token());

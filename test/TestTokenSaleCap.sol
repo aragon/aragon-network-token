@@ -83,11 +83,12 @@ contract TestTokenSaleCap {
     ms.deployAndSetANT(sale);
     ms.activateSale(sale);
     sale.setMockedBlockNumber(12);
-    sale.proxyPayment.value(99 finney)(address(this));
+    sale.proxyPayment.value(98 finney)(address(this));
 
     sale.revealCap(100 finney, sale.mock_capSecret());
 
     Assert.equal(sale.hardCap(), 100 finney, 'Revealing cap should change hard cap');
+    Assert.isFalse(sale.saleFinalized(), 'Revealing cap shouldnt end sale if not reached yet');
   }
 
   function testHardCap() {
@@ -101,7 +102,7 @@ contract TestTokenSaleCap {
     ms.deployAndSetANT(sale);
     ms.activateSale(sale);
     sale.setMockedBlockNumber(12);
-    sale.setMockedTotalCollected(1499999 ether + 950 finney); // hard cap is 1.5m
+    sale.setMockedTotalCollected(999999 ether + 950 finney); // hard cap is 1m
     sale.proxyPayment.value(60 finney)(address(this));
   }
 
@@ -170,7 +171,6 @@ contract TestTokenSaleCap {
 
     sale.setMockedBlockNumber(1000000);
     sale.proxyPayment.value(15 finney)(address(this));
-    sale.setMockedBlockNumber(60000000);
 
     ms.withdrawWallet(sale);
     Assert.equal(ms.balance, 0 finney, "Funds shouldnt have been transfered");

@@ -11,10 +11,10 @@ const contributors = [
   { address: '0x53C72d570fB57DB8bfAd81F2eb6b4a3910f49976', usd: 10000 },
 ]
 
-const ethPrice = 75.43
+const ethPrice = 87.91
 const jorgeAddress = '0x4838Eab6F43841E0D233Db4CeA47BD64F614f0c5'
-const saleAddress = '0x28cae0ef73c3b5c80ac7dc1ccb3398c10e196dac'
-const multisigAddress = '0x4d39e11903fb14c22e8d28ebb00b6b4c88a253b9'
+const saleAddress = '0xdcab5d235131b02ab93f7e9bf3daed22d464be8a'
+const multisigAddress = '0xcafE1A77e84698c83CA8931F54A755176eF75f2C'
 
 const now = +new Date() / 1000
 const month = 30 * 24 * 3600
@@ -45,10 +45,8 @@ module.exports = function (callback) {
 
     return MultiSigWallet
       .at(multisigAddress)
-      .submitTransaction(saleAddress, 0, data, { gas: 1e6, from: jorgeAddress })
+      .submitTransaction(saleAddress, 0, data, { gas: 3e5, from: jorgeAddress })
       .then(() => { console.log('tx submitted yay'); cb() })
       .catch(e => { console.log('stopping operation'); callback() })
-
-    console.log('–––––––––––––––––––––––––––––––––')
   }, callback)
 }
