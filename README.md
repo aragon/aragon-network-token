@@ -1,4 +1,4 @@
-# Aragon Network Token [![Build Status](https://travis-ci.org/aragon/aragon-network-token.svg?branch=master)](https://travis-ci.org/aragon/aragon-network-token) ![Join our slack](https://aragon.chat/badge.svg)
+# Aragon Network Token [![Build Status](https://travis-ci.org/aragon/aragon-network-token.svg?branch=master)](https://travis-ci.org/aragon/aragon-network-token) [Join our chat](https://aragon.chat/)
 
 <img src="rsc/ant_header.jpg"/>
 
@@ -58,7 +58,7 @@ Sale:
 Code for the ANT token and the sale has been reviewed by:
 
 - Jorge Izquierdo, Aragon (author).
-- Jordi Baylina, MiniMe author. [Pending audit results](/)
-- Piper Merriam, MiniMe author. [Pending audit results](/)
+- Jordi Baylina, MiniMe author. [Audit](https://medium.com/@jbaylina/aragon-token-and-token-sale-audit-21cade332f1d)
+- Piper Merriam, pyethereum. [Audit](https://gist.github.com/pipermerriam/7f36f9c9446d4fb8d0e6d842d7212177)
 
 A bug bounty for the ANT token and sale started on [pending date]. More details.
