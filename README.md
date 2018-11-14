@@ -62,3 +62,7 @@ Code for the ANT token and the sale has been reviewed by:
 - Piper Merriam, pyethereum. [Audit](https://gist.github.com/pipermerriam/7f36f9c9446d4fb8d0e6d842d7212177)
 
 A bug bounty for the ANT token and sale started on [pending date]. More details.
+
+## Rinkeby
+
+There's a copy of ANT token deployed in Rinkeby, initially intended to test AGP-1 Kit, with this address: `0xad0f1afea49a46a8409bf4863070631fec2cedc6`.
