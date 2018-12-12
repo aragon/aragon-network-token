@@ -4,7 +4,7 @@ import "./interface/Controller.sol";
 import "./ANT.sol";
 
 /*
-    Copyright 2017, Jorge Izquierdo (Aragon Foundation)
+    Copyright 2017, Jorge Izquierdo (Aragon Association)
 */
 /*
 
