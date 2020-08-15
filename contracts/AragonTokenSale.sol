@@ -7,7 +7,7 @@ import "./ANPlaceholder.sol";
 import "./SaleWallet.sol";
 
 /*
-    Copyright 2017, Jorge Izquierdo (Aragon Foundation)
+    Copyright 2017, Jorge Izquierdo (Aragon Association)
     Copyright 2017, Jordi Baylina (Giveth)
 
     Based on SampleCampaign-TokenController.sol from https://github.com/Giveth/minime

@@ -6,7 +6,7 @@ import "./MiniMeToken.sol";
 import "zeppelin/SafeMath.sol";
 
 /*
-    Copyright 2017, Jorge Izquierdo (Aragon Foundation)
+    Copyright 2017, Jorge Izquierdo (Aragon Association)
 
     Based on VestedToken.sol from https://github.com/OpenZeppelin/zeppelin-solidity
 

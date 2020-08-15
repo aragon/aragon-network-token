@@ -6,7 +6,8 @@
     "type": "git",
     "url": "https://github.com/AragonOne/aragon-network-token.git"
   },
-  "license": "GPL-3.0",
+  "author": "Aragon Association <legal@aragon.org>",
+  "license": "GPL-3.0-or-later",
   "bugs": {
     "url": "https://github.com/AragonOne/aragon-network-token/issues"
   },
