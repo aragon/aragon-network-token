@@ -66,7 +66,7 @@ All the funds collected will be instantly sent to the Aragon Dev multisig for se
 
 Disclaimer: Please do not send from exchanges.
 
-<img src="rsc/ant_buy.png"/>
+<img src=".github/assets/ant_buy.png"/>
 
 #### 6. sale.revealCap()
 
@@ -102,7 +102,7 @@ The ANPlaceholder will transfer its Token Controller power and it will be able t
 
 The sale contract is now suicided in favor of the network, though it shouldn't have any ether.
 
-<img src="rsc/an_deploy.png"/>
+<img src=".github/assets/an_deploy.png"/>
 
 ### Token operations
 
