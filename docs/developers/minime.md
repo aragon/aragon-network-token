@@ -1,4 +1,6 @@
-# MiniMe tokens
+# About the MiniMe token
+
+The Aragon Network Token is an instance of a MiniMe token.
 
 MiniMe tokens are standard ERC20 tokens with additional functionality.
 

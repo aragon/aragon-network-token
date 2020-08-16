@@ -1,10 +1,10 @@
-# ANT Initial Sale flow
+# Initial token sale flow
 
-[Example of a successful testnet sale on Kovan](https://kovan.etherscan.io/address/0x506E1db7DA1B3876eAcd2EdDf6ED551A7F2787D0)
+[Example of a successful testnet sale on Kovan](https://kovan.etherscan.io/address/0x506E1db7DA1B3876eAcd2EdDf6ED551A7F2787D0).
+
+_(Note: gas amounts are calculated for May 2017 and parameters chosen for ANT)_
 
 ### Instantiation
-
-_(Note gas amounts are calculated for May 2017)_
 
 #### 1. Deploy sale – 1,425,663 gas
 `AragonTokenSale` will be deployed 1 week prior to the beginning of the sale with the following parameters:
@@ -68,7 +68,7 @@ All the funds collected will be instantly sent to the Aragon Dev multisig for se
 
 Disclaimer: Please do not send directly from exchanges.
 
-<img src=".github/assets/ant_buy.png"/>
+<img src="./assets/ant_buy.png"/>
 
 #### 6. `sale.revealCap()`
 
@@ -104,7 +104,7 @@ The ANPlaceholder will transfer its Token Controller power of ANT to the deploye
 
 The sale contract is now suicided in favor of the Aragon Network, though it shouldn't have any ether.
 
-<img src=".github/assets/an_deploy.png"/>
+<img src="./assets/an_deploy.png"/>
 
 ### Token operations
 
