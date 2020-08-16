@@ -13,7 +13,9 @@
     "async": "^2.4.0",
     "ganache-cli": "^6.10.1",
     "moment": "^2.18.1",
-    "truffle": "3.2.1",
+    "truffle": "3.2.1"
+  },
+  "resolutions": {
     "truffle-provisioner": "0.1.2"
   },
   "scripts": {

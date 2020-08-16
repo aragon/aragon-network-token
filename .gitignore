@@ -4,9 +4,8 @@
 # Build artifacts
 **/**/build/
 
-# Ignore lock files
+# Ignore package-lock files (only use yarn.lock)
 package-lock.json
-yarn.lock
 
 # Misc
 .DS_Store
