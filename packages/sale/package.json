@@ -1,17 +1,14 @@
 {
-  "name": "aragon-network-token",
+  "name": "@aragon/network-token-sale",
   "version": "0.0.1",
-  "description": "Aragon network token",
+  "private": "true",
+  "description": "Aragon Network Token sale",
   "repository": {
     "type": "git",
     "url": "https://github.com/AragonOne/aragon-network-token.git"
   },
   "author": "Aragon Association <legal@aragon.org>",
   "license": "GPL-3.0-or-later",
-  "bugs": {
-    "url": "https://github.com/AragonOne/aragon-network-token/issues"
-  },
-  "homepage": "https://github.com/AragonOne/aragon-network-token",
   "devDependencies": {
     "async": "^2.4.0",
     "ganache-cli": "^6.10.1",
