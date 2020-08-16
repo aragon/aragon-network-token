@@ -5,7 +5,7 @@
   "description": "Aragon Network Token sale",
   "repository": {
     "type": "git",
-    "url": "https://github.com/AragonOne/aragon-network-token.git"
+    "url": "https://github.com/aragon/aragon-network-token.git"
   },
   "author": "Aragon Association <legal@aragon.org>",
   "license": "GPL-3.0-or-later",
