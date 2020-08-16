@@ -1,4 +1,4 @@
-# Aragon Network Token [![Build Status](https://travis-ci.org/aragon/aragon-network-token.svg?branch=master)](https://travis-ci.org/aragon/aragon-network-token) [Join our chat](https://aragon.chat/)
+# Aragon Network Token
 
 <img src=".github/assets/ant_header.jpg"/>
 
@@ -7,7 +7,7 @@ Important resources:
 - [Presale allocation details](/PRESALE.md)
 - [Multisig structure](/MULTISIG.md)
 - [Token sale flow](/SALE_FLOW.md)
-- [Technical overview](https://blog.aragon.one/aragon-token-sale-technical-overview-9c2a4b910755) blogpost.
+- [Technical overview](https://blog.aragon.one/aragon-token-sale-technical-overview-9c2a4b910755) blog post.
 
 ## ABIs
 
