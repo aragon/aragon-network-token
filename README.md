@@ -40,15 +40,20 @@ This repo is divided into multiple sub-packages:
 
 ## Important contracts
 
-Token:
+### Token
 
 - [ANT.sol](packages/sale/contracts/ANT.sol): Main contract for the token. Derives MiniMeIrrevocableVestedToken.
 - [MiniMeIrrevocableVestedToken.sol](packages/sale/contracts/MiniMeIrrevocableVestedToken.sol): Adds vesting to MiniMeToken. Derives MiniMeToken.
 - [MiniMeToken.sol](packages/sale/contracts/MiniMeToken.sol): MiniMe token implementation.
 
-Sale:
+Only the `ANT.sol` contract was deployed (to [`0x960b236A07cf122663c4303350609A66A7B288C0`](https://etherscan.io/token/0x960b236A07cf122663c4303350609A66A7B288C0)).
+
+### Sale
 
 - [AragonTokenSale.sol](packages/sale/contracts/AragonTokenSale.sol): Implementation of the initial distribution of ANT.
 - [ANPlaceholder.sol](packages/sale/contracts/ANPlaceholder.sol): Placeholder for the Aragon Network before its deployment.
 - [SaleWallet.sol](packages/sale/contracts/SaleWallet.sol): Simple contract that will hold all funds until final block of the sale.
 - [MultisigWallet.sol](packages/sale/contracts/MultisigWallet.sol): Gnosis multisig used for Aragon and community multisigs.
+
+Deployment addresses for each contract can be [found in the
+documentation](docs/token/sale-resources.md#deployments).
