@@ -37,6 +37,7 @@ Smart contracts and technical resources for the [Aragon Network Token](https://a
 This repo is divided into multiple independent sub-packages:
 
 - [`sale`](packages/sale): the original token sale contracts, including the [official ANT token contract](packages/sale/contracts/ANT.sol)
+- [`an-controller`](packages/an-controller): the final token controller, severely limiting exposed controller functionality. To be eventually connected to the Aragon Network.
 
 ## Important contracts
 

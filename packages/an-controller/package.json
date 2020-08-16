@@ -1,0 +1,24 @@
+{
+  "name": "@aragon/network-token-controller",
+  "version": "0.0.1",
+  "private": "true",
+  "description": "Aragon Network Token controller",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aragon/aragon-network-token.git"
+  },
+  "author": "Aragon Association <legal@aragon.org>",
+  "license": "GPL-3.0-or-later",
+  "devDependencies": {
+    "@nomiclabs/buidler": "^1.4.3",
+    "@nomiclabs/buidler-ganache": "^1.3.3",
+    "@nomiclabs/buidler-truffle5": "^1.3.4",
+    "@nomiclabs/buidler-web3": "^1.3.4",
+    "web3": "^1.2.11"
+  },
+  "scripts": {
+    "compile": "buidler compile --force",
+    "compile:mocks": "buidler compile --config buidler.config.4.js",
+    "test": "yarn compile:mocks && buidler test"
+  }
+}

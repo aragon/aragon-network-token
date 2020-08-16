@@ -1,0 +1,29 @@
+name: ci:sale
+
+on:
+  push:
+    branches: master
+  pull_request:
+    paths:
+    - '*'
+    - 'packages/an-controller/**'
+
+defaults:
+  run:
+    working-directory: 'packages/an-controller'
+
+jobs:
+  CI:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install node
+      uses: actions/setup-node@v1
+      with:
+        node-version: 10
+    - name: yarn install
+      run: yarn install --frozen-lockfile
+    - name: test
+      run: yarn run test
+env:
+  CI: true
