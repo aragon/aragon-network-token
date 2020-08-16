@@ -1,11 +1,4 @@
-<p align="center"><img src=".github/assets/ant_banner.jpg"></p>
-
-<div align="center">
-  <!-- Security -->
-  <a href="SECURITY.md">
-    <img src="https://img.shields.io/badge/security-audited-green?style=flat-square" alt="Security" />
-  </a>
-</div>
+<p align="center"><img width="50%" src=".github/assets/aragon_banner.svg"></p>
 
 <div align="center">
   <h4>
@@ -25,12 +18,19 @@
 
 # Aragon Network Token
 
+<p>
+  <!-- Security -->
+  <a href="SECURITY.md">
+    <img src="https://img.shields.io/badge/security-audited-green?style=flat-square" alt="Security" />
+  </a>
+</p>
+
 Smart contracts and technical resources for the [Aragon Network Token](https://aragon.org/token/ant).
 
-> ✅ ANT's token address is [`0x960b236A07cf122663c4303350609A66A7B288C0`](https://etherscan.io/token/0x960b236A07cf122663c4303350609A66A7B288C0)
-> 🔍 Audits and security details are available in the [security policy](SECURITY.md)
-> 🔑 Information about the Multisig wallets involved in the sale are available [in the wiki](https://wiki.aragon.org/association/multisigs/overview/)
-> 📚 Technical documentation is available [in the repo](docs/) or as a [Gitbook](docs.aragon.org/ant)
+- ✅ ANT's token address is [`0x960b236A07cf122663c4303350609A66A7B288C0`](https://etherscan.io/token/0x960b236A07cf122663c4303350609A66A7B288C0)
+- 🔍 Audits and security details are available in the [security policy](SECURITY.md)
+- 🔑 Information about the Multisig wallets involved in the sale are available [in the wiki](https://wiki.aragon.org/association/multisigs/overview/)
+- 📚 Technical documentation is available [in the repo](docs/) or as a [Gitbook](docs.aragon.org/ant)
 
 ## Structure
 
