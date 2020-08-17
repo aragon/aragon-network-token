@@ -10,6 +10,8 @@ contract ANController is ITokenController {
     IMiniMeLike public ant;
     address public minter;
 
+    event ChangedMinter(address indexed minter);
+
     /**
     * @dev Ensure the msg.sender is the minter
     */
@@ -29,6 +31,7 @@ contract ANController is ITokenController {
 
     function changeMinter(address _newMinter) external onlyMinter {
         minter = _newMinter;
+        emit ChangedMinter(_newMinter);
     }
 
     // Default controller settings for allowing token transfers.
