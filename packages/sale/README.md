@@ -1,5 +1,7 @@
 # Aragon Network Token sale
 
+[![Build Status](https://img.shields.io/github/workflow/status/aragon/aragon-network-token/ci:sale?style=flat-square)](https://github.com/aragon/aragon-network-token/actions?query=workflow%3Aci%3Asale)
+
 Smart contracts related to the [Aragon Network Token sale](https://aragon.org/blog/aragon-token-sale-technical-overview-9c2a4b910755).
 
 ## Status
