@@ -6,11 +6,11 @@ on:
   pull_request:
     paths:
     - '*'
-    - 'packages/an-controller/**'
+    - 'packages/controller/**'
 
 defaults:
   run:
-    working-directory: 'packages/an-controller'
+    working-directory: 'packages/controller'
 
 jobs:
   CI:
