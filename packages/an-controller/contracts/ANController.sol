@@ -4,7 +4,7 @@ import "./interfaces/IMiniMeLike.sol";
 import "./interfaces/ITokenController.sol";
 
 
-contract ANController is ITokenController {
+contract ANTController is ITokenController {
     string private constant ERROR_NOT_MINTER = "ANC_SENDER_NOT_MINTER";
 
     IMiniMeLike public ant;
