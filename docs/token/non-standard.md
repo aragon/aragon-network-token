@@ -18,9 +18,11 @@ It useful to note that this behaviour is considered non-standard for ERC20s, and
 
 ## Initially vested tokens
 
-Some token holders (founders, advisors, and early contributors) received tokens from the initial token sale that included a vesting period to limit their transferability.
+The ANT contract includes specific functionality for whitelisted addresses to create irrevocable time-based token vests by transferring tokens from their own balance.
 
-Although all such tokens are vested and transferable in full, [this blog post](https://aragon.org/blog/a-note-for-exchanges-or-holders-interacting-with-ant-in-an-automated-manner-fe13152c1b36) may still be a useful historical resource for exchanges or other automated market makers interested in integrating with ANT.
+Some token holders (founders, advisors, and early contributors) received tokens around the initial token sale that were granted in such a way to limit their transferability.
+
+Although all such tokens are now vested and transferable in full, [this blog post](https://aragon.org/blog/a-note-for-exchanges-or-holders-interacting-with-ant-in-an-automated-manner-fe13152c1b36) may still be a useful historical resource for exchanges or other automated market makers interested in integrating with ANT.
 
 ## Receiving ETH
 

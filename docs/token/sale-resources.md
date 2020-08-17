@@ -30,7 +30,7 @@ Address: [`0xD39902f046B5885D70e9E66594b65f84D4d1c952`](https://etherscan.io/add
 
 The placeholder controller for ANT, replaceable by the [Community Multisig](#community-multisig).
 
-### Aragon Association "Dev" Multisig
+### Aragon Association ("Dev") Multisig
 
 Address: [`0xcafE1A77e84698c83CA8931F54A755176eF75f2C`](https://etherscan.io/address/0xcafe1a77e84698c83ca8931f54a755176ef75f2c)
 

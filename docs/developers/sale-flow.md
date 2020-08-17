@@ -102,7 +102,7 @@ After the sale is finalized, the Community Multisig will eventually be able to p
 
 The ANPlaceholder will transfer its Token Controller power of ANT to the deployed Aragon Network, allowing the Network to mint further tokens if the Network's governance decides so.
 
-The sale contract is now suicided in favor of the Aragon Network, though it shouldn't have any ether.
+The sale contract is now selfdestructed in favor of the Aragon Network, though it shouldn't have any ether.
 
 <img src="./assets/an_deploy.png"/>
 

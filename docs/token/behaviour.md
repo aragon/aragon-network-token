@@ -22,9 +22,9 @@ In addition to the vanilla behaviour, it implements a number of features that ar
 - Cloning, with balances from a specific block snapshot
 - An optional controller (see below)
 
-And finally, a specific behaviour implemented solely for the token sale:
+And finally, a specific behaviour for the initial launch period:
 
-- Irrevocable time-based vesting, callable only prior to the token sale starting
+- Irrevocable time-based vesting from a whitelisted granter, used during the token sale and to afterwards to generate the [presale allocations](https://aragon.org/blog/pre-sale-transparency-report-333e310304c)
 
 ## Controller
 
