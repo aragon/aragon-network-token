@@ -1,6 +1,6 @@
 // Slightly modified Zeppelin tests for ERC20 VestedToken.
 
-const assertJump = require('./helpers/assertJump');
+const assertThrows = require('./helpers/assertThrows');
 var AragonTokenSaleTokenMock = artifacts.require("./helpers/AragonTokenSaleTokenMock");
 var MiniMeIrrevocableVestedToken = artifacts.require("MiniMeIrrevocableVestedToken");
 const timer = require('./helpers/timer');
@@ -32,7 +32,7 @@ contract('MiniMeIrrevocableVestedToken', function(accounts) {
     try {
       await token.grantVestedTokens(receiver, tokenAmount, now, now + 10000, now + 20000, { from: granter })
     } catch(error) {
-      return assertJump(error);
+      return assertThrows(error);
     }
   })
 
@@ -48,7 +48,7 @@ contract('MiniMeIrrevocableVestedToken', function(accounts) {
     try {
       await token.setCanCreateGrants(accounts[2], true, { from: accounts[0] });
     } catch(error) {
-      return assertJump(error);
+      return assertThrows(error);
     }
   })
 
@@ -76,7 +76,7 @@ contract('MiniMeIrrevocableVestedToken', function(accounts) {
       try {
         await token.transfer(accounts[7], 1, { from: receiver })
       } catch(error) {
-        return assertJump(error);
+        return assertThrows(error);
       }
       assert.fail('should have thrown before');
     })
@@ -86,7 +86,7 @@ contract('MiniMeIrrevocableVestedToken', function(accounts) {
         await token.approve(accounts[7], 1, { from: receiver })
         await token.transferFrom(receiver, accounts[7], tokenAmount, { from: accounts[7] })
       } catch(error) {
-        return assertJump(error);
+        return assertThrows(error);
       }
       assert.fail('should have thrown before');
     })
@@ -95,7 +95,7 @@ contract('MiniMeIrrevocableVestedToken', function(accounts) {
       try {
         await token.revokeTokenGrant(receiver, 0, { from: granter });
       } catch(error) {
-        return assertJump(error);
+        return assertThrows(error);
       }
     })
 

@@ -1,2 +1,11 @@
-node_modules/
-build/
+# Dependencies
+**/**/node_modules
+
+# Build artifacts
+**/**/build/
+
+# Ignore package-lock files (only use yarn.lock)
+package-lock.json
+
+# Misc
+.cache

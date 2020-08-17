@@ -1,7 +1,6 @@
 // Zeppelin tests for ERC20 StandardToken.
 
-const assertJump = require('./helpers/assertJump');
-const assertGas = require('./helpers/assertGas');
+const assertThrows = require('./helpers/assertThrows');
 var AragonTokenSaleTokenMock = artifacts.require("AragonTokenSaleTokenMock");
 var TokenReceiverMock = artifacts.require("TokenReceiverMock");
 var StandardToken = artifacts.require("MiniMeToken.sol");
@@ -39,7 +38,7 @@ contract('StandardToken', function(accounts) {
     try {
       let transfer = await token.transfer(accounts[1], 101);
     } catch(error) {
-      return assertJump(error);
+      return assertThrows(error);
     }
     assert.fail('should have thrown before');
   });
@@ -63,7 +62,7 @@ contract('StandardToken', function(accounts) {
     try {
       let transfer = await token.transferFrom(accounts[0], accounts[2], 100, {from: accounts[1]});
     } catch (error) {
-      return assertJump(error);
+      return assertThrows(error);
     }
     assert.fail('should have thrown before');
   });
@@ -81,7 +80,7 @@ contract('StandardToken', function(accounts) {
     try {
       let approveAndCall = await token.approveAndCall(receiver.address, 150, '0xbeef')
     } catch (error) {
-      return assertGas(error);
+      return assertThrows(error);
     }
     assert.fail('should have thrown before');
   })
