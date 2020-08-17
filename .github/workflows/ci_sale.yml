@@ -23,6 +23,8 @@ jobs:
         node-version: 10
     - name: yarn install
       run: yarn install --frozen-lockfile
+    - name: compile
+      run: yarn run compile
     - name: test
       run: yarn run test
 env:

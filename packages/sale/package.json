@@ -19,6 +19,7 @@
     "truffle-provisioner": "0.1.2"
   },
   "scripts": {
+    "compile": "truffle compile",
     "test": "./scripts/ganache-cli.sh"
   }
 }
