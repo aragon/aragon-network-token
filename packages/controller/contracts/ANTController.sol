@@ -22,7 +22,7 @@ contract ANTController is ITokenController {
 
     constructor(IMiniMeLike _ant, address _minter) public {
         ant = _ant;
-        minter = _minter;
+        _changeMinter(_minter);
     }
 
     /**
@@ -41,8 +41,7 @@ contract ANTController is ITokenController {
     * @param _newMinter Address that will be permitted to mint ANT
     */
     function changeMinter(address _newMinter) external onlyMinter {
-        minter = _newMinter;
-        emit ChangedMinter(_newMinter);
+        _changeMinter(_newMinter);
     }
 
     // Default ITokenController settings for allowing token transfers.
@@ -75,5 +74,12 @@ contract ANTController is ITokenController {
     */
     function onApprove(address /* _owner */, address /* _spender */, uint /* _amount */) external returns (bool) {
       return true;
+    }
+
+    // Internal fns
+
+    function _changeMinter(address _newMinter) internal {
+        minter = _newMinter;
+        emit ChangedMinter(_newMinter);
     }
 }
