@@ -1,6 +1,12 @@
 # Aragon Network Token Controller
 
-Final controller of the Aragon Network Token.org/blog/aragon-token-sale-technical-overview-9c2a4b910755).
+Final, non-changeable controller of the Aragon Network Token.
+
+Once set as ANT's controller, it will limit the token controller functionality to only allowing a specified address to call `generateTokens()`.
+
+## Status
+
+🚨 Pre-audit.
 
 ## Development
 
