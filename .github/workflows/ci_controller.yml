@@ -1,4 +1,4 @@
-name: ci:sale
+name: ci:controller
 
 on:
   push:
