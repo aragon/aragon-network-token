@@ -28,7 +28,7 @@ start_ganache() {
   # Allow unlimited contract size for solidity tests
   npx ganache-cli --allowUnlimitedContractSize -k byzantium -i ${NETWORK_ID} -l ${GAS_LIMIT} -g ${GAS_PRICE} -a ${ACCOUNTS} -e ${BALANCE} -p ${PORT} > /dev/null &
   rpc_pid=$!
-  sleep 3
+  sleep 5
   echo "Running ganache-cli with pid ${rpc_pid} in port ${PORT}"
 }
 
