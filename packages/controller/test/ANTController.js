@@ -334,9 +334,9 @@ contract('ANTController', ([_, minter, newMinter, holder1, holder2, holder3, new
     })
 
     context('ANT controller functionality', () => {
-      const from = holder1
-
       context('when called directly', () => {
+        const from = holder1
+
         it('now disallows all controller functionality', async () => {
           await assertRevert(ant.changeController(from, { from }))
 
@@ -355,6 +355,8 @@ contract('ANTController', ([_, minter, newMinter, holder1, holder2, holder3, new
         // This is a bit shallow of a test, but is meant to ensure that the controller does not
         // proxy any calls over to ANT.
         let antControllerMockedAsAnt
+        // The minter is privileged, so perhaps it can do more?
+        const from = minter
 
         beforeEach('set up controller mocked as ANT', async () => {
           antControllerMockedAsAnt = await ANTMock.at(antController.address)

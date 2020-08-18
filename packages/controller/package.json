@@ -21,6 +21,8 @@
   "scripts": {
     "compile": "buidler compile --force",
     "compile:mocks": "buidler compile --config buidler.config.4.js",
-    "test": "yarn compile:mocks && buidler test"
+    "compile:mocks-e2e": "buidler compile --config buidler.config.e2e-4.js",
+    "test": "yarn compile:mocks && buidler test",
+    "test:e2e": "yarn compile:mocks-e2e && buidler --config buidler.config.e2e.js --network ganache test e2e/test/mainnet-fork.js"
   }
 }
