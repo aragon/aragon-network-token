@@ -55,7 +55,7 @@ contract ANTController is ITokenController {
     * @return Always false, this controller does not permit the ANT contract to receive ETH transfers
     */
     function proxyPayment(address /* _owner */) external payable returns (bool) {
-      return false;
+        return false;
     }
 
     /**
@@ -64,7 +64,7 @@ contract ANTController is ITokenController {
     * @return Always true, this controller allows all transfers
     */
     function onTransfer(address /* _from */, address /* _to */, uint /* _amount */) external returns (bool) {
-      return true;
+        return true;
     }
 
     /**
@@ -73,7 +73,7 @@ contract ANTController is ITokenController {
     * @return Always true, this controller allows all approvals
     */
     function onApprove(address /* _owner */, address /* _spender */, uint /* _amount */) external returns (bool) {
-      return true;
+        return true;
     }
 
     // Internal fns
