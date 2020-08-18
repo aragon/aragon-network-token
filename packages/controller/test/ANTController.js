@@ -325,6 +325,12 @@ contract('ANTController', ([_, minter, newMinter, holder1, holder2, holder3, new
           await assertRevert(antController.send(amount))
         }
       })
+
+      it('reverts on sending ETH to ANTController through proxyPayment', async () => {
+        for (const amount of amounts) {
+          await assertRevert(antController.proxyPayment(holder1, { from: holder1, value: amount }))
+        }
+      })
     })
 
     context('ANT controller functionality', () => {

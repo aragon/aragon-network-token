@@ -6,6 +6,7 @@ import "./interfaces/ITokenController.sol";
 
 contract ANTController is ITokenController {
     string private constant ERROR_NOT_MINTER = "ANTC_SENDER_NOT_MINTER";
+    string private constant ERROR_NOT_ANT = "ANTC_SENDER_NOT_ANT";
 
     IMiniMeLike public ant;
     address public minter;
@@ -55,6 +56,8 @@ contract ANTController is ITokenController {
     * @return Always false, this controller does not permit the ANT contract to receive ETH transfers
     */
     function proxyPayment(address /* _owner */) external payable returns (bool) {
+        // We only apply this extra check here to ensure `proxyPayment()` cannot be sent ETH from arbitrary addresses
+        require(msg.sender == address(ant), ERROR_NOT_ANT);
         return false;
     }
 
