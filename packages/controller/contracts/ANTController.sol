@@ -5,7 +5,7 @@ import "./interfaces/ITokenController.sol";
 
 
 contract ANTController is ITokenController {
-    string private constant ERROR_NOT_MINTER = "ANC_SENDER_NOT_MINTER";
+    string private constant ERROR_NOT_MINTER = "ANTC_SENDER_NOT_MINTER";
 
     IMiniMeLike public ant;
     address public minter;
