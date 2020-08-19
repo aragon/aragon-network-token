@@ -21,6 +21,7 @@ function tokenAmount(amount) {
 
 // Note that these tests are meant to be run serially, and each later test is expected to rely
 // on state changes from an earlier test!
+// Also note that ANT was compiled on 0.4.8, and therefore throws invalid JUMPs rather than reverts
 contract('ANTController (mainnet)', ([_, minter, newMinter, random, random2, random3, bigbags]) => {
   let ant, sale, cMultisig
   let antController
@@ -90,7 +91,7 @@ contract('ANTController (mainnet)', ([_, minter, newMinter, random, random2, ran
         const oldBalance = await ant.balanceOf(recipient)
         const oldSupply = await ant.totalSupply()
 
-        await antController.mint(recipient, amount, { from: minter })
+        await antController.generateTokens(recipient, amount, { from: minter })
 
         assertBn(await ant.balanceOf(recipient), oldBalance.add(amount))
         assertBn(await ant.totalSupply(), oldSupply.add(amount))
@@ -101,8 +102,8 @@ contract('ANTController (mainnet)', ([_, minter, newMinter, random, random2, ran
       const amount = tokenAmount(10)
       const oldSupply = await ant.totalSupply()
 
-      await assertRevert(antController.mint(random, amount, { from: random }))
-      await assertRevert(antController.mint(random, amount, { from: newMinter }))
+      await assertRevert(antController.generateTokens(random, amount, { from: random }))
+      await assertRevert(antController.generateTokens(random, amount, { from: newMinter }))
 
       assertBn(await ant.totalSupply(), oldSupply)
     })
@@ -182,35 +183,55 @@ contract('ANTController (mainnet)', ([_, minter, newMinter, random, random2, ran
   })
 
   describe('controller functionality', () => {
-    it('does not allow someone else to call controller functionality', async () => {
-      const from = random
+    context('when calling ANT directly', () => {
+      it('does not allow someone else to call controller functionality', async () => {
+        const from = random
 
-      await assertJump(ant.changeController(from, { from }))
+        await assertJump(ant.changeController(from, { from }))
 
-      await assertJump(ant.enableTransfers(true, { from }))
-      await assertJump(ant.enableTransfers(false, { from }))
+        await assertJump(ant.enableTransfers(true, { from }))
+        await assertJump(ant.enableTransfers(false, { from }))
 
-      await assertJump(ant.generateTokens(from, tokenAmount(10), { from }))
-      await assertJump(ant.generateTokens(minter, tokenAmount(10), { from }))
+        await assertJump(ant.generateTokens(from, tokenAmount(10), { from }))
+        await assertJump(ant.generateTokens(minter, tokenAmount(10), { from }))
 
-      await assertJump(ant.destroyTokens(from, tokenAmount(10), { from }))
-      await assertJump(ant.destroyTokens(AA_MULTISIG_ADDRESS, tokenAmount(10), { from }))
+        await assertJump(ant.destroyTokens(from, tokenAmount(10), { from }))
+        await assertJump(ant.destroyTokens(AA_MULTISIG_ADDRESS, tokenAmount(10), { from }))
+      })
     })
 
-    it('does not proxy any controller functions from controller to token', async () => {
-      const from = minter
-      const antControllerMockedAsAnt = await ANT.at(antController.address)
+    context('when calling through ANTController', () => {
+      let antControllerMockedAsAnt
 
-      await assertJump(ant.changeController(from, { from }))
+      before(async () => {
+        antControllerMockedAsAnt = await ANT.at(antController.address)
+      })
 
-      await assertJump(ant.enableTransfers(true, { from }))
-      await assertJump(ant.enableTransfers(false, { from }))
+      it('allows generateTokens() to be called by minter', async () => {
+        const from = minter
 
-      await assertJump(ant.generateTokens(from, tokenAmount(10), { from }))
-      await assertJump(ant.generateTokens(minter, tokenAmount(10), { from }))
+        await antControllerMockedAsAnt.generateTokens(from, tokenAmount(10), { from })
+        await antControllerMockedAsAnt.generateTokens(minter, tokenAmount(10), { from })
+      })
 
-      await assertJump(ant.destroyTokens(from, tokenAmount(10), { from }))
-      await assertJump(ant.destroyTokens(AA_MULTISIG_ADDRESS, tokenAmount(10), { from }))
+      it('disallows generateTokens() to be called by others', async () => {
+        const from = random
+
+        await assertRevert(antControllerMockedAsAnt.generateTokens(from, tokenAmount(10), { from }))
+        await assertRevert(antControllerMockedAsAnt.generateTokens(minter, tokenAmount(10), { from }))
+      })
+
+      it('does not proxy other controller functions', async () => {
+        const from = minter
+
+        await assertRevert(antControllerMockedAsAnt.changeController(from, { from }))
+
+        await assertRevert(antControllerMockedAsAnt.enableTransfers(true, { from }))
+        await assertRevert(antControllerMockedAsAnt.enableTransfers(false, { from }))
+
+        await assertRevert(antControllerMockedAsAnt.destroyTokens(from, tokenAmount(10), { from }))
+        await assertRevert(antControllerMockedAsAnt.destroyTokens(AA_MULTISIG_ADDRESS, tokenAmount(10), { from }))
+      })
     })
   })
 })

@@ -79,7 +79,7 @@ contract('ANTController', ([_, minter, newMinter, holder1, holder2, holder3, new
           const oldSupply = await ant.totalSupply()
           const oldBalance = await ant.balanceOf(recipient)
 
-          const receipt = await antController.mint(recipient, amount, { from: minter })
+          const receipt = await antController.generateTokens(recipient, amount, { from: minter })
 
           assertEvent(receipt,
             'Transfer',
@@ -121,8 +121,8 @@ contract('ANTController', ([_, minter, newMinter, holder1, holder2, holder3, new
         it('disallows tokens from being generated', async () => {
           const oldSupply = await ant.totalSupply()
 
-          await assertRevert(antController.mint(newHolder, tokenAmount(10), { from: newHolder }))
-          await assertRevert(antController.mint(holder1, tokenAmount(10), { from: holder1 }))
+          await assertRevert(antController.generateTokens(newHolder, tokenAmount(10), { from: newHolder }))
+          await assertRevert(antController.generateTokens(holder1, tokenAmount(10), { from: holder1 }))
 
           assertBn(await ant.totalSupply(), oldSupply, 'ANT total supply should not have changed')
         })
@@ -334,46 +334,67 @@ contract('ANTController', ([_, minter, newMinter, holder1, holder2, holder3, new
     })
 
     context('ANT controller functionality', () => {
-      context('when called directly', () => {
+      context('when calling ANT directly', () => {
         const from = holder1
 
-        it('now disallows all controller functionality', async () => {
-          await assertRevert(ant.changeController(from, { from }))
+        const cases = [
+          [minter, 'minter'], // minter is privileged, so perhaps it can do more?
+          [holder1, 'random account'],
+        ]
+        for (const [from, desc] of cases) {
+          it(`disallows all controller functionality (from: ${desc})`, async () => {
+            await assertRevert(ant.changeController(from, { from }))
 
-          await assertRevert(ant.enableTransfers(true, { from }))
-          await assertRevert(ant.enableTransfers(false, { from }))
+            await assertRevert(ant.enableTransfers(true, { from }))
+            await assertRevert(ant.enableTransfers(false, { from }))
 
-          await assertRevert(ant.generateTokens(from, tokenAmount(10), { from }))
-          await assertRevert(ant.generateTokens(minter, tokenAmount(10), { from }))
+            await assertRevert(ant.generateTokens(from, tokenAmount(10), { from }))
+            await assertRevert(ant.generateTokens(minter, tokenAmount(10), { from }))
 
-          await assertRevert(ant.destroyTokens(from, tokenAmount(10), { from }))
-          await assertRevert(ant.destroyTokens(holder2, tokenAmount(10), { from }))
-        })
+            await assertRevert(ant.destroyTokens(from, tokenAmount(10), { from }))
+            await assertRevert(ant.destroyTokens(holder2, tokenAmount(10), { from }))
+          })
+        }
       })
 
       context('when calling through ANTController', () => {
-        // This is a bit shallow of a test, but is meant to ensure that the controller does not
-        // proxy any calls over to ANT.
+        // This is a bit shallow of a test, but is meant to test whether the controller proxies any
+        // calls over to ANT.
         let antControllerMockedAsAnt
-        // The minter is privileged, so perhaps it can do more?
-        const from = minter
 
         beforeEach('set up controller mocked as ANT', async () => {
           antControllerMockedAsAnt = await ANTMock.at(antController.address)
         })
 
-        it('does not proxy through calls', async () => {
-          await assertRevert(antControllerMockedAsAnt.changeController(from, { from }))
+        it('allows generateTokens when called from the minter', async () => {
+          const from = minter
 
-          await assertRevert(antControllerMockedAsAnt.enableTransfers(true, { from }))
-          await assertRevert(antControllerMockedAsAnt.enableTransfers(false, { from }))
+          await antControllerMockedAsAnt.generateTokens(from, tokenAmount(10), { from })
+          await antControllerMockedAsAnt.generateTokens(minter, tokenAmount(10), { from })
+        })
+
+        it('disallows generateTokens when not called from the minter', async () => {
+          const from = holder1
 
           await assertRevert(antControllerMockedAsAnt.generateTokens(from, tokenAmount(10), { from }))
           await assertRevert(antControllerMockedAsAnt.generateTokens(minter, tokenAmount(10), { from }))
-
-          await assertRevert(antControllerMockedAsAnt.destroyTokens(from, tokenAmount(10), { from }))
-          await assertRevert(antControllerMockedAsAnt.destroyTokens(holder2, tokenAmount(10), { from }))
         })
+
+        const cases = [
+          [minter, 'minter'], // minter is privileged, so perhaps it can do more?
+          [holder1, 'random account'],
+        ]
+        for (const [from, desc] of cases) {
+          it(`does not proxy through other calls (from: ${desc})`, async () => {
+            await assertRevert(antControllerMockedAsAnt.changeController(from, { from }))
+
+            await assertRevert(antControllerMockedAsAnt.enableTransfers(true, { from }))
+            await assertRevert(antControllerMockedAsAnt.enableTransfers(false, { from }))
+
+            await assertRevert(antControllerMockedAsAnt.destroyTokens(from, tokenAmount(10), { from }))
+            await assertRevert(antControllerMockedAsAnt.destroyTokens(holder2, tokenAmount(10), { from }))
+          })
+        }
       })
     })
 
