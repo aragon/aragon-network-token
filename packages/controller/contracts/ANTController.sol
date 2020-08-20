@@ -27,14 +27,14 @@ contract ANTController is ITokenController {
     }
 
     /**
-    * @notice Mint ANT for a specified address
+    * @notice Generate ANT for a specified address
     * @dev Note that failure to generate the requested tokens will result in a revert
-    * @param _receiver Address to receive minted ANT
-    * @param _amount Amount to mint
+    * @param _owner Address to receive ANT
+    * @param _amount Amount to generate
     * @return True if the tokens are generated correctly
     */
-    function mint(address _receiver, uint256 _amount) external onlyMinter returns (bool) {
-        return ant.generateTokens(_receiver, _amount);
+    function generateTokens(address _owner, uint256 _amount) external onlyMinter returns (bool) {
+        return ant.generateTokens(_owner, _amount);
     }
 
     /**
