@@ -12,6 +12,13 @@ Address: [`0x960b236A07cf122663c4303350609A66A7B288C0`](https://etherscan.io/add
 
 The ANT token contract.
 
+### ANTController
+
+Address:
+[`0x2443d44325bb07861Cd8C9C8Ba1569b6c39D9d95`](https://etherscan.io/address/0x2443d44325bb07861Cd8C9C8Ba1569b6c39D9d95)
+
+ANT's final, non-changeable controller.
+
 ### AragonTokenSale
 
 Address: [`0x0cEB0D54A7e87Dfa16dDF7656858cF7e29851fD7`](https://etherscan.io/address/0x0ceb0d54a7e87dfa16ddf7656858cf7e29851fd7#code)
