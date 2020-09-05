@@ -4,7 +4,7 @@
 
 - ANT's token contract address is [`0x960b236A07cf122663c4303350609A66A7B288C0`](https://etherscan.io/token/0x960b236A07cf122663c4303350609A66A7B288C0)
 - ANT is a ERC20 token, specifically a [MiniMe token](../developers/minime.md)
-- Its current controller is a [pass-through placeholder](#controller), meant to be replaced for the [Aragon Network](https://aragon.network/)
+- Its current controller is a non-changeable controller, [`0x2443d44325bb07861Cd8C9C8Ba1569b6c39D9d95`](https://etherscan.io/address/0x2443d44325bb07861Cd8C9C8Ba1569b6c39D9d95), only allowing a specified address to mint more tokens
 
 ## Introduction
 
