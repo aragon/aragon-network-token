@@ -4,11 +4,13 @@
 
 The final, non-changeable controller of the Aragon Network Token.
 
-Once set as ANT's controller, it will limit the token controller functionality to only allowing a specified address to call `generateTokens()`.
+Now set as ANT's controller, it limits ANT's token controller related functionality to only allowing a specified address to call `generateTokens()`.
 
 ## Status
 
-🚨 Pre-audit.
+This package is in _preservation_ mode.
+
+This token controller was deployed and set to be ANT's controller in August 2020.
 
 ## Development
 

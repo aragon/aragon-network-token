@@ -30,6 +30,6 @@ And finally, a specific behaviour for the initial launch period:
 
 The controller of a MiniMe token holds significant power over the token itself (more information available in the [developers' section on MiniMes](../developers/minime#optional-token-controller)).
 
-The current controller of ANT is the [`ANPlaceholder` contract](https://etherscan.io/address/0xd39902f046b5885d70e9e66594b65f84d4d1c952#code). This contract is a pass-through controller, implemented to only allow all transfers. It does not contain functionality to exercise any other controller capabilities.
+The current controller of ANT is a **final, non-changeable** contract, [`ANTController`](https://etherscan.io/address/0x2443d44325bb07861Cd8C9C8Ba1569b6c39D9d95#code). This contract limits the token controller related function of ANT to only allowing a specified address to call `generateTokens()`.
 
-The [Community Multisig](./sale-resources#community-multisig) has the ability to transfer the controller of ANT from this `ANPlaceholder` contract to another controller. This ability is intended to be only activated once the Aragon Network is deployed, transferring the control of ANT to the Aragon Network.
+Currently this address is the [Community Multisig](./sale-resources#community-multisig), but will be [transitioned to the Aragon Network DAO in its Firebird phase](https://aragon.org/blog/ant-controller).

@@ -11,3 +11,7 @@ Numerous audits were conducted for the original Aragon Network Token sale. These
 - Jorge Izquierdo, Aragon (author).
 - Jordi Baylina, MiniMe author: [audit](https://medium.com/@jbaylina/aragon-token-and-token-sale-audit-21cade332f1d)
 - Piper Merriam, pyethereum: [audit](https://gist.github.com/pipermerriam/7f36f9c9446d4fb8d0e6d842d7212177)
+
+### Controller
+
+[Coinspect](https://coinspect.com/) conducted a security audit for the final ANT controller in August 2020. [See report](https://coinspect.com/doc/CoinspectReportANT2020.pdf).
