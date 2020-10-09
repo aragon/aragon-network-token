@@ -1,19 +1,14 @@
 const { ecsign, ecrecover } = require('ethereumjs-util')
 const { keccak256 } = require('web3-utils')
-const { bigExp, bn, getEventAt, getEventArgument, MAX_UINT256, ZERO_ADDRESS } = require('@aragon/contract-helpers-test')
+const { bn, MAX_UINT256, ZERO_ADDRESS } = require('@aragon/contract-helpers-test')
 const { assertBn, assertEvent, assertRevert } = require('@aragon/contract-helpers-test/src/asserts')
+const { CHAIN_ID } = require('./helpers/chain')
 const { createDomainSeparator } = require('./helpers/erc712')
 const { createPermitDigest, PERMIT_TYPEHASH } = require('./helpers/erc2612')
 const { createTransferWithAuthorizationDigest, TRANSFER_WITH_AUTHORIZATION_TYPEHASH } = require('./helpers/erc3009')
+const { tokenAmount } = require('./helpers/tokens')
 
 const ANTv2 = artifacts.require('ANTv2')
-
-function tokenAmount(amount) {
-  return bigExp(amount, 18)
-}
-
-// Pretend we're on mainnet
-const CHAIN_ID = 1
 
 contract('ANTv2', ([_, minter, newMinter, holder1, holder2, newHolder]) => {
   let ant
