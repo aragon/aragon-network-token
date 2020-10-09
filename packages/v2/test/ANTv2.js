@@ -250,6 +250,7 @@ contract('ANTv2', ([_, minter, newMinter, holder1, holder2, newHolder]) => {
   context('ERC-2612', () => {
     let owner
     let ownerPrivKey
+    const spender = newHolder
 
     async function createPermitSignature(owner, spender, value, nonce, deadline) {
       const digest = await createPermitDigest(ant, owner, spender, value, nonce, deadline)
@@ -277,7 +278,6 @@ contract('ANTv2', ([_, minter, newMinter, holder1, holder2, newHolder]) => {
     })
 
     it('can set allowance through permit', async () => {
-      const spender = newHolder
       const deadline = MAX_UINT256
 
       const firstValue = tokenAmount(100)
@@ -299,16 +299,51 @@ contract('ANTv2', ([_, minter, newMinter, holder1, holder2, newHolder]) => {
       assertEvent(secondReceipt, 'Approval', { expectedArgs: { owner, spender, value: secondValue } })
     })
 
+    it('cannot use wrong signature', async () => {
+      const deadline = MAX_UINT256
+      const nonce = await ant.nonces(owner)
+
+      const firstValue = tokenAmount(100)
+      const secondValue = tokenAmount(500)
+      const firstSig = await createPermitSignature(owner, spender, firstValue, nonce, deadline)
+      const secondSig = await createPermitSignature(owner, spender, secondValue, nonce, deadline)
+
+      // Use a mismatching signature
+      await assertRevert(ant.permit(owner, spender, firstValue, deadline, secondSig.v, secondSig.r, secondSig.s), 'ANTV2:INVALID_SIGNATURE')
+    })
+
     it('cannot use expired permit', async () => {
+      const value = tokenAmount(100)
+      const nonce = await ant.nonces(owner)
+
+      // Use a prior deadline
+      const now = bn((await web3.eth.getBlock('latest')).timestamp)
+      const deadline = now.sub(bn(60))
+
+      const { r, s, v } = await createPermitSignature(owner, spender, value, nonce, deadline)
+      await assertRevert(ant.permit(owner, spender, value, deadline, v, r, s), 'ANTV2:AUTH_EXPIRED')
     })
 
     it('cannot use surpassed permit', async () => {
+      const deadline = MAX_UINT256
+      const nonce = await ant.nonces(owner)
+
+      // Generate two signatures with the same nonce and use one
+      const firstValue = tokenAmount(100)
+      const secondValue = tokenAmount(500)
+      const firstSig = await createPermitSignature(owner, spender, firstValue, nonce, deadline)
+      const secondSig = await createPermitSignature(owner, spender, secondValue, nonce, deadline)
+
+      // Using one should disallow the other
+      await ant.permit(owner, spender, secondValue, deadline, secondSig.v, secondSig.r, secondSig.s)
+      await assertRevert(ant.permit(owner, spender, firstValue, deadline, firstSig.v, firstSig.r, firstSig.s), 'ANTV2:INVALID_SIGNATURE')
     })
   })
 
   context('ERC-3009', () => {
     let from
     let fromPrivKey
+    const to = newHolder
 
     async function createTransferWithAuthorizationSignature(from, to, value, validBefore, validAfter, nonce) {
       const digest = await createTransferWithAuthorizationDigest(ant, from, to, value, validBefore, validAfter, nonce)
@@ -336,7 +371,6 @@ contract('ANTv2', ([_, minter, newMinter, holder1, holder2, newHolder]) => {
     })
 
     it('can transfer through transferWithAuthorization', async () => {
-      const to = newHolder
       const validAfter = 0
       const validBefore = MAX_UINT256
 
@@ -362,13 +396,74 @@ contract('ANTv2', ([_, minter, newMinter, holder1, holder2, newHolder]) => {
       assert.equal(await ant.authorizationState(from, secondNonce), true, 'erc3009: second auth')
     })
 
-    it('cannot use before authorization', async () => {
+    it('cannot use wrong signature', async () => {
+      const validAfter = 0
+      const validBefore = MAX_UINT256
+
+      const firstNonce = keccak256('first')
+      const firstValue = tokenAmount(25)
+      const firstSig = await createTransferWithAuthorizationSignature(from, to, firstValue, validAfter, validBefore, firstNonce)
+
+      const secondNonce = keccak256('second')
+      const secondValue = tokenAmount(10)
+      const secondSig = await createTransferWithAuthorizationSignature(from, to, secondValue, validAfter, validBefore, secondNonce)
+
+      // Use a mismatching signature
+      await assertRevert(
+        ant.transferWithAuthorization(from, to, firstValue, validAfter, validBefore, firstNonce, secondSig.v, secondSig.r, secondSig.s),
+        'ANTV2:INVALID_SIGNATURE'
+      )
     })
 
-    it('cannot use after authorization', async () => {
+    it('cannot use before valid period', async () => {
+      const value = tokenAmount(100)
+      const nonce = keccak256('nonce')
+
+      // Use a future period
+      const now = bn((await web3.eth.getBlock('latest')).timestamp)
+      const validAfter = now.add(bn(60))
+      const validBefore = MAX_UINT256
+
+      const { r, s, v } = await createTransferWithAuthorizationSignature(from, to, value, validAfter, validBefore, nonce)
+      await assertRevert(
+        ant.transferWithAuthorization(from, to, value, validAfter, validBefore, nonce, v, r, s),
+        'ANTV2:AUTH_NOT_YET_VALID'
+      )
+    })
+
+    it('cannot use after valid period', async () => {
+      const value = tokenAmount(100)
+      const nonce = keccak256('nonce')
+
+      // Use a prior period
+      const now = bn((await web3.eth.getBlock('latest')).timestamp)
+      const validBefore = now.sub(bn(60))
+      const validAfter = 0
+
+      const { r, s, v } = await createTransferWithAuthorizationSignature(from, to, value, validAfter, validBefore, nonce)
+      await assertRevert(
+        ant.transferWithAuthorization(from, to, value, validAfter, validBefore, nonce, v, r, s),
+        'ANTV2:AUTH_EXPIRED'
+      )
     })
 
     it('cannot use expired nonce', async () => {
+      const value = tokenAmount(100)
+      const nonce = keccak256('nonce')
+      const validAfter = 0
+      const validBefore = MAX_UINT256
+
+      const firstValue = tokenAmount(25)
+      const secondValue = tokenAmount(10)
+      const firstSig = await createTransferWithAuthorizationSignature(from, to, firstValue, validAfter, validBefore, nonce)
+      const secondSig = await createTransferWithAuthorizationSignature(from, to, secondValue, validAfter, validBefore, nonce)
+
+      // Using one should disallow the other
+      await ant.transferWithAuthorization(from, to, firstValue, validAfter, validBefore, nonce, firstSig.v, firstSig.r, firstSig.s)
+      await assertRevert(
+        ant.transferWithAuthorization(from, to, secondValue, validAfter, validBefore, nonce, secondSig.v, secondSig.r, secondSig.s),
+        'ANTV2:AUTH_ALREADY_USED'
+      )
     })
   })
 })
