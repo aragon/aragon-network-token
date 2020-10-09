@@ -24,3 +24,7 @@ yarn test
 ```
 
 CI for this package is run through the [`ci_sale` Github action](../../.github/workflows/ci_sale.yml).
+
+## Credits
+
+- MiniMe: Jordi Baylina (Giveth)
