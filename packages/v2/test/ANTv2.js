@@ -243,8 +243,7 @@ contract('ANTv2', ([_, minter, newMinter, holder1, holder2, newHolder]) => {
   })
 
   context('ERC-2612', () => {
-    let owner
-    let ownerPrivKey
+    let owner, ownerPrivKey
     const spender = newHolder
 
     async function createPermitSignature(owner, spender, value, nonce, deadline) {
@@ -336,8 +335,7 @@ contract('ANTv2', ([_, minter, newMinter, holder1, holder2, newHolder]) => {
   })
 
   context('ERC-3009', () => {
-    let from
-    let fromPrivKey
+    let from, fromPrivKey
     const to = newHolder
 
     async function createTransferWithAuthorizationSignature(from, to, value, validBefore, validAfter, nonce) {

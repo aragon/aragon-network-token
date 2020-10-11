@@ -9,9 +9,7 @@ const ANTv2 = artifacts.require('ANTv2')
 const ANTv2Migrator = artifacts.require('ANTv2Migrator')
 
 contract('ANTv2Migrator', ([_, owner, holder1, holder2]) => {
-  let antv1
-  let antv2
-  let migrator
+  let antv1, antv2, migrator
 
   async function itMigratesCorrectly(fn, { from, amount }) {
     const fromV1Bal = await antv1.balanceOf(from)
