@@ -13,9 +13,9 @@ contract ANTv2Migrator is ApproveAndCallReceiver {
 
     address private constant BURNED_ADDR = 0x000000000000000000000000000000000000dEaD;
 
-    address owner;
-    IERC20 antv1;
-    ANTv2 antv2;
+    address public owner;
+    IERC20 public antv1;
+    ANTv2 public antv2;
 
     constructor(address _owner, IERC20 _antv1, ANTv2 _antv2) public {
         owner = _owner;

@@ -47,6 +47,12 @@ contract('ANTv2Migrator', ([_, owner, holder1, holder2]) => {
       await migrator.initiate({ from: owner })
     })
 
+    it('set up ANTv2Migrator correctly', async () => {
+      assert.equal(await migrator.owner(), owner, 'initiate: owner')
+      assert.equal(await migrator.antv1(), antv1.address, 'initiate: antv1')
+      assert.equal(await migrator.antv2(), antv2.address, 'initiate: antv2')
+    })
+
     it('set up ANTv2 correctly', async () => {
       assertBn(await antv1.totalSupply(), await antv2.totalSupply(), 'initiate: supply')
       assertBn(await antv2.balanceOf(migrator.address), await antv2.totalSupply(), 'initiate: migrator balance')
