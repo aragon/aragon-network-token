@@ -10,7 +10,7 @@
       Documentation
     </a>
     <span> | </span>
-    <a href="https://discord.gg/ruBR6GN">
+    <a href="https://discord.gg/aragon">
       Chat
     </a>
   </h4>
@@ -37,12 +37,12 @@ Smart contracts and technical resources for the [Aragon Network Token](https://a
 
 This repo is divided into multiple independent sub-packages:
 
-- [`sale`](packages/sale): the original token sale contracts, including the [official ANT token contract](packages/sale/contracts/ANT.sol)
-- [`controller`](packages/controller): the final token controller, severely limiting exposed controller functionality. To be eventually connected to the Aragon Network.
+- [`sale`](packages/sale): the original v1 token sale contracts, including the [official ANTv1 token contract](packages/sale/contracts/ANT.sol)
+- [`controller`](packages/controller): the final v1 token controller, severely limiting exposed controller functionality. To be eventually connected to the Aragon Network.
 
 ## Important contracts
 
-### Token
+### ANTv1
 
 - [ANT.sol](packages/sale/contracts/ANT.sol): Main contract for the token. Derives MiniMeIrrevocableVestedToken.
 - [MiniMeIrrevocableVestedToken.sol](packages/sale/contracts/MiniMeIrrevocableVestedToken.sol): Adds vesting to MiniMeToken. Derives MiniMeToken.
@@ -61,6 +61,6 @@ Deployment addresses for each contract can be [found in the documentation](docs/
 
 ### Controller
 
-- [`ANTController.sol`](packages/controller/contracts/ANTController.sol): The final, non-changeable controller of the Aragon Network Token.
+- [`ANTController.sol`](packages/controller/contracts/ANTController.sol): The final, non-changeable controller of ANTv1.
 
 Only the `ANTController.sol` contract was deployed (to [`0x2443d44325bb07861Cd8C9C8Ba1569b6c39D9d95`](https://etherscan.io/address/0x2443d44325bb07861Cd8C9C8Ba1569b6c39D9d95#code)).
