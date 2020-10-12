@@ -37,10 +37,8 @@ async function deploy({ antv1, chain, owner }) {
   }])
 
   if (confirmed) {
-    await Promise.all([
-      ANTv2.new(chain, migratorAddr),
-      ANTv2Migrator.new(owner, antv1, antv2Addr)
-    ])
+    await ANTv2.new(chain, migratorAddr),
+    await ANTv2Migrator.new(owner, antv1, antv2Addr)
 
     const deployedANTv2 = await ANTv2.at(antv2Addr)
     const deployedMigrator = await ANTv2Migrator.at(migratorAddr)
