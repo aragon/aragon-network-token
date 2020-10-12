@@ -15,8 +15,11 @@
     "@nomiclabs/buidler-ganache": "^1.3.3",
     "@nomiclabs/buidler-truffle5": "^1.3.4",
     "@nomiclabs/buidler-web3": "^1.3.4",
+    "buidler-local-networks-config-plugin": "^0.0.1",
     "chai": "^4.2.0",
     "ethereumjs-util": "^7.0.6",
+    "inquirer": "^7.3.3",
+    "rlp": "^2.2.6",
     "web3": "^1.2.11",
     "web3-eth-abi": "^1.2.11",
     "web3-utils": "^1.2.11"
