@@ -191,8 +191,9 @@ contract('ANTv2Migrator (mainnet)', ([_, interimOwner, bigbags]) => {
 
     it('can migrate all', async () => {
       // Raw transaction for infinity approveAndCall
+      // Already hardcoded with ANTv2Migrator's address
       const calldata =
-        `0xcae9ca51000000000000000000000000${migrator.address.slice(2)}ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff00000000000000000000000000000000000000000000000000000000000000600000000000000000000000000000000000000000000000000000000000000000`
+        '0xcae9ca51000000000000000000000000b2DbEb75051FF6EaaDc485D1ff10Ff788C0d567Cffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff00000000000000000000000000000000000000000000000000000000000000600000000000000000000000000000000000000000000000000000000000000000'
       await antv1.sendTransaction({ from: owner, data: calldata })
 
       assertBn(await antv1.balanceOf(owner), 0, 'antv1: all migrated')
