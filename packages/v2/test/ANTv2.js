@@ -15,6 +15,7 @@ contract('ANTv2', ([_, minter, newMinter, holder1, holder2, newHolder]) => {
 
   async function itTransfersCorrectly(fn, { from, to, value }) {
     const isMint = from === ZERO_ADDRESS
+    const isBurn = to === ZERO_ADDRESS
 
     const prevFromBal = await ant.balanceOf(from)
     const prevToBal = await ant.balanceOf(to)
@@ -25,6 +26,9 @@ contract('ANTv2', ([_, minter, newMinter, holder1, holder2, newHolder]) => {
     if (isMint) {
       assertBn(await ant.balanceOf(to), prevToBal.add(value), 'mint: to balance')
       assertBn(await ant.totalSupply(), prevSupply.add(value), 'mint: total supply')
+    } else if (isBurn) {
+      assertBn(await ant.balanceOf(from), prevFromBal.sub(value), 'burn: from balance')
+      assertBn(await ant.totalSupply(), prevSupply.sub(value), 'burn: total supply')
     } else {
       assertBn(await ant.balanceOf(from), prevFromBal.sub(value), 'transfer: from balance')
       assertBn(await ant.balanceOf(to), prevToBal.add(value), 'transfer: to balance')
@@ -60,7 +64,7 @@ contract('ANTv2', ([_, minter, newMinter, holder1, holder2, newHolder]) => {
 
   context('mints', () => {
     context('is minter', () => {
-      it('can mint', async () => {
+      it('can mint tokens', async () => {
         await itTransfersCorrectly(
           (_, to, value) => ant.mint(to, value, { from: minter }),
           {
@@ -80,7 +84,7 @@ contract('ANTv2', ([_, minter, newMinter, holder1, holder2, newHolder]) => {
     })
 
     context('not minter', () => {
-      it('cannot mint', async () => {
+      it('cannot mint tokens', async () => {
         await assertRevert(ant.mint(newHolder, tokenAmount(100), { from: holder1 }), 'ANTV2:NOT_MINTER')
       })
 
@@ -227,6 +231,69 @@ contract('ANTv2', ([_, minter, newMinter, holder1, holder2, newHolder]) => {
           'MATH:SUB_UNDERFLOW'
         )
       })
+    })
+  })
+
+  context('burns', () => {
+    context('holds bag', () => {
+      it('can burn tokens', async () => {
+        await itTransfersCorrectly(
+          (from, to, value) => ant.burn(value, { from }),
+          {
+            from: holder1,
+            to: ZERO_ADDRESS,
+            value: (await ant.balanceOf(holder1)).sub(tokenAmount(1))
+          }
+        )
+      })
+
+      it('can burn all tokens', async () => {
+        await itTransfersCorrectly(
+          (from, to, value) => ant.burn(value, { from }),
+          {
+            from: holder1,
+            to: ZERO_ADDRESS,
+            value: await ant.balanceOf(holder1)
+          }
+        )
+      })
+
+      it('cannot burn above balance', async () => {
+        await assertRevert(
+          ant.burn((await ant.balanceOf(holder1)).add(bn('1')), { from: holder1 }),
+          'MATH:SUB_UNDERFLOW'
+        )
+      })
+    })
+
+    context('bagless', () => {
+      it('cannot burn any', async () => {
+        await assertRevert(
+          ant.burn(bn('1'), { from: newHolder }),
+          'MATH:SUB_UNDERFLOW'
+        )
+      })
+    })
+
+    it('can burn all tokens', async () => {
+      await itTransfersCorrectly(
+        (from, to, value) => ant.burn(value, { from }),
+        {
+          from: holder1,
+          to: ZERO_ADDRESS,
+          value: await ant.balanceOf(holder1)
+        }
+      )
+      await itTransfersCorrectly(
+        (from, to, value) => ant.burn(value, { from }),
+        {
+          from: holder2,
+          to: ZERO_ADDRESS,
+          value: await ant.balanceOf(holder2)
+        }
+      )
+
+      assertBn(await ant.totalSupply(), 0, 'burn: no total supply')
     })
   })
 

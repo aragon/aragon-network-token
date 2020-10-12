@@ -6,8 +6,9 @@ import './libraries/SafeMath.sol';
 
 // Lightweight token modelled after UNI-LP: https://github.com/Uniswap/uniswap-v2-core/blob/v1.0.1/contracts/UniswapV2ERC20.sol
 // Adds:
-//   - A minting role
-//   - transferWithAuth()
+//   - An exposed `mint()` with minting role
+//   - An exposed `burn()`
+//   - ERC-3009 (`transferWithAuthorization()`)
 contract ANTv2 is IERC20 {
     using SafeMath for uint256;
 
@@ -84,6 +85,13 @@ contract ANTv2 is IERC20 {
         emit Transfer(address(0), to, value);
     }
 
+    function _burn(address from, uint value) internal {
+        // Balance is implicitly checked with SafeMath's underflow protection
+        balanceOf[from] = balanceOf[from].sub(value);
+        totalSupply = totalSupply.sub(value);
+        emit Transfer(from, address(0), value);
+    }
+
     function _approve(address owner, address spender, uint256 value) private {
         allowance[owner][spender] = value;
         emit Approval(owner, spender, value);
@@ -102,6 +110,11 @@ contract ANTv2 is IERC20 {
 
     function changeMinter(address newMinter) external onlyMinter {
         _changeMinter(newMinter);
+    }
+
+    function burn(uint256 value) external returns (bool) {
+        _burn(msg.sender, value);
+        return true;
     }
 
     function approve(address spender, uint256 value) external returns (bool) {
