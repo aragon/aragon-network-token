@@ -65,6 +65,7 @@ contract ANTv2 is IERC20 {
             )
         );
         address recoveredAddress = ecrecover(digest, v, r, s);
+        // Explicitly disallow authorizations for address(0) as ecrecover returns address(0) on malformed messages
         require(recoveredAddress != address(0) && recoveredAddress == signer, "ANTV2:INVALID_SIGNATURE");
     }
 
@@ -94,6 +95,7 @@ contract ANTv2 is IERC20 {
     function _transfer(address from, address to, uint256 value) private {
         require(to != address(this), "ANTV2:RECEIVER_IS_TOKEN");
 
+        // Balance is implicitly checked with SafeMath's underflow protection
         balanceOf[from] = balanceOf[from].sub(value);
         balanceOf[to] = balanceOf[to].add(value);
         emit Transfer(from, to, value);
@@ -125,6 +127,7 @@ contract ANTv2 is IERC20 {
 
     function transferFrom(address from, address to, uint256 value) external returns (bool) {
         if (allowance[from][msg.sender] != uint256(-1)) {
+            // Allowance is implicitly checked with SafeMath's underflow protection
             allowance[from][msg.sender] = allowance[from][msg.sender].sub(value);
         }
         _transfer(from, to, value);
