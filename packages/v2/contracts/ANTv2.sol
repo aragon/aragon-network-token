@@ -12,12 +12,6 @@ import './libraries/SafeMath.sol';
 contract ANTv2 is IERC20 {
     using SafeMath for uint256;
 
-    string private constant ERROR_NOT_MINTER = "ANTV2:NOT_MINTER";
-    string private constant ERROR_AUTH_EXPIRED = "ANTV2:AUTH_EXPIRED";
-    string private constant ERROR_AUTH_NOT_YET_VALID = "ANTV2:AUTH_NOT_YET_VALID";
-    string private constant ERROR_AUTH_ALREADY_USED = "ANTV2:AUTH_ALREADY_USED";
-    string private constant ERROR_INVALID_SIGNATURE = "ANTV2:INVALID_SIGNATURE";
-
     string public constant name = "Aragon Network Token";
     string public constant symbol = "ANT";
     uint8 public constant decimals = 18;
@@ -44,7 +38,7 @@ contract ANTv2 is IERC20 {
     event ChangeMinter(address indexed minter);
 
     modifier onlyMinter {
-        require(msg.sender == minter, ERROR_NOT_MINTER);
+        require(msg.sender == minter, "ANTV2:NOT_MINTER");
         _;
     }
 
@@ -71,7 +65,7 @@ contract ANTv2 is IERC20 {
             )
         );
         address recoveredAddress = ecrecover(digest, v, r, s);
-        require(recoveredAddress != address(0) && recoveredAddress == signer, ERROR_INVALID_SIGNATURE);
+        require(recoveredAddress != address(0) && recoveredAddress == signer, "ANTV2:INVALID_SIGNATURE");
     }
 
     function _changeMinter(address newMinter) internal {
@@ -138,7 +132,7 @@ contract ANTv2 is IERC20 {
     }
 
     function permit(address owner, address spender, uint256 value, uint256 deadline, uint8 v, bytes32 r, bytes32 s) external {
-        require(deadline >= block.timestamp, ERROR_AUTH_EXPIRED);
+        require(deadline >= block.timestamp, "ANTV2:AUTH_EXPIRED");
 
         bytes32 encodeData = keccak256(abi.encode(PERMIT_TYPEHASH, owner, spender, value, nonces[owner]++, deadline));
         _validateSignedData(owner, encodeData, v, r, s);
@@ -159,9 +153,9 @@ contract ANTv2 is IERC20 {
     )
         external
     {
-        require(block.timestamp > validAfter, ERROR_AUTH_NOT_YET_VALID);
-        require(block.timestamp < validBefore, ERROR_AUTH_EXPIRED);
-        require(!authorizationState[from][nonce],  ERROR_AUTH_ALREADY_USED);
+        require(block.timestamp > validAfter, "ANTV2:AUTH_NOT_YET_VALID");
+        require(block.timestamp < validBefore, "ANTV2:AUTH_EXPIRED");
+        require(!authorizationState[from][nonce],  "ANTV2:AUTH_ALREADY_USED");
 
         bytes32 encodeData = keccak256(abi.encode(TRANSFER_WITH_AUTHORIZATION_TYPEHASH, from, to, value, validAfter, validBefore, nonce));
         _validateSignedData(from, encodeData, v, r, s);
