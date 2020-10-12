@@ -98,6 +98,8 @@ contract ANTv2 is IERC20 {
     }
 
     function _transfer(address from, address to, uint256 value) private {
+        require(to != address(this), "ANTV2:RECEIVER_IS_TOKEN");
+
         balanceOf[from] = balanceOf[from].sub(value);
         balanceOf[to] = balanceOf[to].add(value);
         emit Transfer(from, to, value);

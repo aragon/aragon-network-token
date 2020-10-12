@@ -124,6 +124,13 @@ contract('ANTv2', ([_, minter, newMinter, holder1, holder2, newHolder]) => {
           'MATH:SUB_UNDERFLOW'
         )
       })
+
+      it('cannot transfer to token', async () => {
+        await assertRevert(
+          ant.transfer(ant.address, bn('1'), { from: holder1 }),
+          'ANTV2:RECEIVER_IS_TOKEN'
+        )
+      })
     })
 
     context('bagless', () => {
@@ -180,6 +187,13 @@ contract('ANTv2', ([_, minter, newMinter, holder1, holder2, newHolder]) => {
         await assertRevert(
           ant.transferFrom(owner, spender, value.add(bn('1')), { from: spender }),
           'MATH:SUB_UNDERFLOW'
+        )
+      })
+
+      it('cannot transfer to token', async () => {
+        await assertRevert(
+          ant.transferFrom(owner, ant.address, bn('1'), { from: spender }),
+          'ANTV2:RECEIVER_IS_TOKEN'
         )
       })
     })
