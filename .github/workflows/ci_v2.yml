@@ -1,0 +1,29 @@
+name: ci:v2
+
+on:
+  push:
+    branches: master
+  pull_request:
+    paths:
+    - '*'
+    - 'packages/v2/**'
+
+defaults:
+  run:
+    working-directory: 'packages/v2'
+
+jobs:
+  CI:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install node
+      uses: actions/setup-node@v1
+      with:
+        node-version: 10
+    - name: yarn install
+      run: yarn install --frozen-lockfile
+    - name: test
+      run: yarn test
+env:
+  CI: true
