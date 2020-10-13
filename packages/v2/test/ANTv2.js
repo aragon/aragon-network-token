@@ -311,17 +311,6 @@ contract('ANTv2', ([_, minter, newMinter, holder1, holder2, newHolder]) => {
     })
   })
 
-  context('ERC-712', () => {
-    it('has the correct ERC712 domain separator', async () => {
-      const domainSeparator = createDomainSeparator(
-        await ant.name(),
-        bn('1'),
-        CHAIN_ID,
-        ant.address
-      )
-      assert.equal(await ant.DOMAIN_SEPARATOR(), domainSeparator, 'erc712: domain')
-    })
-  })
 
   context('ERC-2612', () => {
     let owner, ownerPrivKey
