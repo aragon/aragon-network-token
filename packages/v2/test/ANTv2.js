@@ -128,7 +128,14 @@ contract('ANTv2', ([_, minter, newMinter, holder1, holder2, newHolder]) => {
       it('cannot transfer to token', async () => {
         await assertRevert(
           ant.transfer(ant.address, bn('1'), { from: holder1 }),
-          'ANTV2:RECEIVER_IS_TOKEN'
+          'ANTV2:RECEIVER_IS_TOKEN_OR_ZERO'
+        )
+      })
+
+      it('cannot transfer to zero address', async () => {
+        await assertRevert(
+          ant.transfer(ZERO_ADDRESS, bn('1'), { from: holder1 }),
+          'ANTV2:RECEIVER_IS_TOKEN_OR_ZERO'
         )
       })
     })
@@ -193,7 +200,14 @@ contract('ANTv2', ([_, minter, newMinter, holder1, holder2, newHolder]) => {
       it('cannot transfer to token', async () => {
         await assertRevert(
           ant.transferFrom(owner, ant.address, bn('1'), { from: spender }),
-          'ANTV2:RECEIVER_IS_TOKEN'
+          'ANTV2:RECEIVER_IS_TOKEN_OR_ZERO'
+        )
+      })
+
+      it('cannot transfer to zero address', async () => {
+        await assertRevert(
+          ant.transferFrom(owner, ZERO_ADDRESS, bn('1'), { from: spender }),
+          'ANTV2:RECEIVER_IS_TOKEN_OR_ZERO'
         )
       })
     })
@@ -457,6 +471,45 @@ contract('ANTv2', ([_, minter, newMinter, holder1, holder2, newHolder]) => {
         { from, to, value: secondValue }
       )
       assert.equal(await ant.authorizationState(from, secondNonce), true, 'erc3009: second auth')
+    })
+
+    it('cannot transfer above balance', async () => {
+      const value = (await ant.balanceOf(from)).add(bn('1'))
+      const nonce = keccak256('nonce')
+      const validAfter = 0
+      const validBefore = MAX_UINT256
+
+      const { r, s, v } = await createTransferWithAuthorizationSignature(from, to, value, validAfter, validBefore, nonce)
+      await assertRevert(
+        ant.transferWithAuthorization(from, to, value, validAfter, validBefore, nonce, v, r, s),
+        'MATH:SUB_UNDERFLOW'
+      )
+    })
+
+    it('cannot transfer to token', async () => {
+      const value = tokenAmount(100)
+      const nonce = keccak256('nonce')
+      const validAfter = 0
+      const validBefore = MAX_UINT256
+
+      const { r, s, v } = await createTransferWithAuthorizationSignature(from, ant.address, value, validAfter, validBefore, nonce)
+      await assertRevert(
+        ant.transferWithAuthorization(from, ant.address, value, validAfter, validBefore, nonce, v, r, s),
+        'ANTV2:RECEIVER_IS_TOKEN_OR_ZERO'
+      )
+    })
+
+    it('cannot transfer to zero address', async () => {
+      const value = tokenAmount(100)
+      const nonce = keccak256('nonce')
+      const validAfter = 0
+      const validBefore = MAX_UINT256
+
+      const { r, s, v } = await createTransferWithAuthorizationSignature(from, ZERO_ADDRESS, value, validAfter, validBefore, nonce)
+      await assertRevert(
+        ant.transferWithAuthorization(from, ZERO_ADDRESS, value, validAfter, validBefore, nonce, v, r, s),
+        'ANTV2:RECEIVER_IS_TOKEN_OR_ZERO'
+      )
     })
 
     it('cannot use wrong signature', async () => {
