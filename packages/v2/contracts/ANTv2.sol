@@ -56,12 +56,12 @@ contract ANTv2 is IERC20 {
         _changeMinter(initialMinter);
     }
 
-    function _validateSignedData(address signer, bytes32 encodedData, uint8 v, bytes32 r, bytes32 s) internal view {
+    function _validateSignedData(address signer, bytes32 encodeData, uint8 v, bytes32 r, bytes32 s) internal view {
         bytes32 digest = keccak256(
             abi.encodePacked(
                 "\x19\x01",
                 DOMAIN_SEPARATOR,
-                encodedData
+                encodeData
             )
         );
         address recoveredAddress = ecrecover(digest, v, r, s);
@@ -138,8 +138,8 @@ contract ANTv2 is IERC20 {
     function permit(address owner, address spender, uint256 value, uint256 deadline, uint8 v, bytes32 r, bytes32 s) external {
         require(deadline >= block.timestamp, "ANTV2:AUTH_EXPIRED");
 
-        bytes32 encodedData = keccak256(abi.encode(PERMIT_TYPEHASH, owner, spender, value, nonces[owner]++, deadline));
-        _validateSignedData(owner, encodedData, v, r, s);
+        bytes32 encodeData = keccak256(abi.encode(PERMIT_TYPEHASH, owner, spender, value, nonces[owner]++, deadline));
+        _validateSignedData(owner, encodeData, v, r, s);
 
         _approve(owner, spender, value);
     }
@@ -161,8 +161,8 @@ contract ANTv2 is IERC20 {
         require(block.timestamp < validBefore, "ANTV2:AUTH_EXPIRED");
         require(!authorizationState[from][nonce],  "ANTV2:AUTH_ALREADY_USED");
 
-        bytes32 encodedData = keccak256(abi.encode(TRANSFER_WITH_AUTHORIZATION_TYPEHASH, from, to, value, validAfter, validBefore, nonce));
-        _validateSignedData(from, encodedData, v, r, s);
+        bytes32 encodeData = keccak256(abi.encode(TRANSFER_WITH_AUTHORIZATION_TYPEHASH, from, to, value, validAfter, validBefore, nonce));
+        _validateSignedData(from, encodeData, v, r, s);
 
         authorizationState[from][nonce] = true;
         emit AuthorizationUsed(from, nonce);
