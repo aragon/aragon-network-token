@@ -176,8 +176,8 @@ contract ANTv2 is IERC20 {
         _validateSignedData(from, encodeData, v, r, s);
 
         authorizationState[from][nonce] = true;
+        emit AuthorizationUsed(from, nonce);
 
         _transfer(from, to, value);
-        emit AuthorizationUsed(from, nonce);
     }
 }
