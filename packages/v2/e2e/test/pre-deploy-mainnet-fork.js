@@ -42,7 +42,7 @@ contract('ANTv2Migrator (mainnet)', ([_, interimOwner, bigbags]) => {
   })
 
   before('deploy ANTv2', async () => {
-    antv2 = await ANTv2.new(CHAIN_ID, interimOwner)
+    antv2 = await ANTv2.new(interimOwner)
   })
 
   before('deploy ANTv2Migrator', async () => {

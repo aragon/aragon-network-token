@@ -2,7 +2,6 @@ const { ecsign, ecrecover } = require('ethereumjs-util')
 const { keccak256 } = require('web3-utils')
 const { bn, MAX_UINT256, ZERO_ADDRESS } = require('@aragon/contract-helpers-test')
 const { assertBn, assertEvent, assertRevert } = require('@aragon/contract-helpers-test/src/asserts')
-const { CHAIN_ID } = require('./helpers/chain')
 const { createDomainSeparator } = require('./helpers/erc712')
 const { createPermitDigest, PERMIT_TYPEHASH } = require('./helpers/erc2612')
 const { createTransferWithAuthorizationDigest, TRANSFER_WITH_AUTHORIZATION_TYPEHASH } = require('./helpers/erc3009')
@@ -46,7 +45,7 @@ contract('ANTv2', ([_, minter, newMinter, holder1, holder2, newHolder]) => {
   }
 
   beforeEach('deploy ANTv2', async () => {
-    ant = await ANTv2.new(CHAIN_ID, minter)
+    ant = await ANTv2.new(minter)
 
     await ant.mint(holder1, tokenAmount(100), { from: minter })
     await ant.mint(holder2, tokenAmount(200), { from: minter })
@@ -325,6 +324,17 @@ contract('ANTv2', ([_, minter, newMinter, holder1, holder2, newHolder]) => {
     })
   })
 
+  context('ERC-712', () => {
+    it('has the correct ERC712 domain separator', async () => {
+      const domainSeparator = createDomainSeparator(
+        await ant.name(),
+        bn('1'),
+        await ant.getChainId(),
+        ant.address
+      )
+      assert.equal(await ant.domainSeparator(), domainSeparator, 'erc712: domain')
+    })
+  })
 
   context('ERC-2612', () => {
     let owner, ownerPrivKey
