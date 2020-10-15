@@ -22,17 +22,17 @@ function tokenAmount(amount) {
 // Note that these tests are meant to be run serially, and each later test is expected to rely
 // on state changes from an earlier test!
 // Also note that ANT was compiled on 0.4.8, and therefore throws invalid JUMPs rather than reverts
-contract('ANTv2Migrator (mainnet)', ([_, interimOwner, bigbags]) => {
+contract('ANTv2 migration (pre-deploy mainnet)', ([_, interimOwner, seed]) => {
   let antv1, cMultisig
   let antv2, migrator
 
   before('get spoofed accounts flush with cash', async () => {
     for (const holder of BIG_HOLDERS) {
-      await web3.eth.sendTransaction({ from: bigbags, to: holder, value: tokenAmount(5) })
+      await web3.eth.sendTransaction({ from: seed, to: holder, value: tokenAmount(5) })
     }
 
     for (const signer of MULTISIG_SIGNERS) {
-      await web3.eth.sendTransaction({ from: bigbags, to: signer, value: tokenAmount(5) })
+      await web3.eth.sendTransaction({ from: seed, to: signer, value: tokenAmount(5) })
     }
   })
 
