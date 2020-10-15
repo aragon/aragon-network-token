@@ -64,7 +64,7 @@ contract('ANTv2 migration (pre-deploy mainnet)', ([_, interimOwner, seed]) => {
     assert.isTrue(await cMultisig.isConfirmed(id))
   })
 
-  it('should pass sanity checks', async () => {
+  it('passes sanity checks', async () => {
     // Double check supply
     assertBn(await antv1.totalSupply(), await antv2.totalSupply())
 

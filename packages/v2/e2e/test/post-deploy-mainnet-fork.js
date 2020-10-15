@@ -1,4 +1,4 @@
-const { bigExp, bn, getEventArgument, MAX_UINT256 } = require('@aragon/contract-helpers-test')
+const { bigExp, bn, getEventArgument, MAX_UINT256, ZERO_ADDRESS } = require('@aragon/contract-helpers-test')
 const { assertBn, assertEvent, assertRevert } = require('@aragon/contract-helpers-test/src/asserts')
 const BIG_HOLDERS = require('../holders')
 const MULTISIG_SIGNERS = require('../signers')
@@ -8,6 +8,7 @@ const MultisigWallet = artifacts.require('MultisigWallet')
 
 const ANTv2 = artifacts.require('ANTv2')
 const ANTv2Migrator = artifacts.require('ANTv2Migrator')
+const EscrowANTv2Migrator = artifacts.require('EscrowANTv2Migrator')
 
 const ANTV2_ADDRESS = '0xa117000000f279D81A1D3cc75430fAA017FA5A2e'
 const ANTV2MIGRATOR_ADDRESS = '0x078BEbC744B819657e1927bF41aB8C74cBBF912D'
@@ -25,7 +26,7 @@ function tokenAmount(amount) {
 // Note that these tests are meant to be run serially, and each later test is expected to rely
 // on state changes from an earlier test!
 // Also note that ANT was compiled on 0.4.8, and therefore throws invalid JUMPs rather than reverts
-contract('ANTv2 migration (pre-deploy mainnet)', ([_, interimOwner, seed]) => {
+contract('ANTv2 migration (post-deploy mainnet)', ([_, interimOwner, seed, guy]) => {
   let antv1, cMultisig
   let antv2, migrator
 
@@ -66,7 +67,7 @@ contract('ANTv2 migration (pre-deploy mainnet)', ([_, interimOwner, seed]) => {
     assert.isTrue(await cMultisig.isConfirmed(id))
   })
 
-  it('should pass sanity checks', async () => {
+  it('passes sanity checks', async () => {
     // Double check supply
     assertBn(await antv1.totalSupply(), await antv2.totalSupply())
 
@@ -198,6 +199,71 @@ contract('ANTv2 migration (pre-deploy mainnet)', ([_, interimOwner, seed]) => {
 
       assertBn(await antv1.balanceOf(owner), 0, 'antv1: all migrated')
       assertBn(await antv2.balanceOf(owner), initialV1Balance, 'antv2: all migrated')
+    })
+  })
+
+  describe('with escrow contract', () => {
+    const owner = BIG_HOLDERS[4]
+    const amount = tokenAmount(100)
+
+    context('allowed by designated account', () => {
+      let escrowMigrator
+
+      before(async () => {
+        const initialV1Balance = await antv1.balanceOf(owner)
+
+        escrowMigrator = await EscrowANTv2Migrator.new(owner, guy)
+        await antv1.transfer(escrowMigrator.address, amount, { from: owner })
+
+        assertBn(await antv1.balanceOf(escrowMigrator.address), amount, 'escrow: held balance')
+        assertBn(await antv1.balanceOf(owner), initialV1Balance.sub(amount), 'escrow: owner v1 balance')
+      })
+
+      it('cannot be migrated by others', async () => {
+        await assertRevert(escrowMigrator.migrate({ from: owner }), 'ESCROW_MIG:NOT_MIGRATOR')
+      })
+
+      it('can be migrated by designated account', async () => {
+        const initialV2Balance = bn(await antv2.balanceOf(owner))
+
+        await escrowMigrator.migrate({ from: guy })
+
+        assertBn(await antv2.balanceOf(owner), initialV2Balance.add(amount), 'escrow: migrated balance')
+        assertBn(await antv1.balanceOf(escrowMigrator.address), 0, 'escrow: no v1 balance')
+        assertBn(await antv2.balanceOf(escrowMigrator.address), 0, 'escrow: no v2 balance')
+      })
+    })
+
+    context('allowed by any account', () => {
+      let escrowMigrator
+
+      before(async () => {
+        const initialV1Balance = await antv1.balanceOf(owner)
+
+        escrowMigrator = await EscrowANTv2Migrator.new(owner, ZERO_ADDRESS)
+        await antv1.transfer(escrowMigrator.address, amount, { from: owner })
+
+        assertBn(await antv1.balanceOf(escrowMigrator.address), amount, 'escrow: held balance')
+        assertBn(await antv1.balanceOf(owner), initialV1Balance.sub(amount), 'escrow: owner v1 balance')
+      })
+
+      it('can be migrated by anyone', async () => {
+        const initialV2Balance = bn(await antv2.balanceOf(owner))
+
+        await escrowMigrator.migrate()
+
+        assertBn(await antv2.balanceOf(owner), initialV2Balance.add(amount), 'escrow: migrated balance')
+        assertBn(await antv1.balanceOf(escrowMigrator.address), 0, 'escrow: no v1 balance')
+        assertBn(await antv2.balanceOf(escrowMigrator.address), 0, 'escrow: no v2 balance')
+      })
+    })
+
+    context('no balance', () => {
+      it('cannot be migrated', async () => {
+        const escrowMigrator = await EscrowANTv2Migrator.new(owner, ZERO_ADDRESS)
+
+        await assertRevert(escrowMigrator.migrate(), 'ESCROW_MIG:NO_BALANCE')
+      })
     })
   })
 })
