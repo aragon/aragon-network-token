@@ -7,7 +7,6 @@ usePlugin('buidler-local-networks-config-plugin')
 
 task('deploy', 'Deploy ANTv2 and migrator')
   .addParam('owner', "The migrator's owner")
-  .addOptionalParam('chain', 'The chain ID to use', 1, types.int)
   .addOptionalParam('antv1', 'The ANTv1 address to use', '0x960b236A07cf122663c4303350609A66A7B288C0')
   .setAction(deploy)
 
