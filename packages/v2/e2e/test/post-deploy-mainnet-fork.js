@@ -9,8 +9,8 @@ const MultisigWallet = artifacts.require('MultisigWallet')
 const ANTv2 = artifacts.require('ANTv2')
 const ANTv2Migrator = artifacts.require('ANTv2Migrator')
 
-const ANTV2_ADDRESS = '0xA117000000e374AFD3689c684010fb13418a6B25'
-const ANTV2MIGRATOR_ADDRESS = '0xb2DbEb75051FF6EaaDc485D1ff10Ff788C0d567C'
+const ANTV2_ADDRESS = '0xa117000000f279D81A1D3cc75430fAA017FA5A2e'
+const ANTV2MIGRATOR_ADDRESS = '0x078BEbC744B819657e1927bF41aB8C74cBBF912D'
 
 const ANTV1_ADDRESS = '0x960b236A07cf122663c4303350609A66A7B288C0'
 const AA_MULTISIG_ADDRESS = '0xcafe1a77e84698c83ca8931f54a755176ef75f2c'
@@ -72,7 +72,7 @@ contract('ANTv2 migration (pre-deploy mainnet)', ([_, interimOwner, seed]) => {
 
     // Double check top three hodlers
     assertBn(await antv1.balanceOf(AA_MULTISIG_ADDRESS), '4966833066039263962000000')
-    assertBn(await antv1.balanceOf('0xe93381fb4c4f14bda253907b18fad305d799241a'), '3320390109084977000000000')
+    assertBn(await antv1.balanceOf('0xe93381fb4c4f14bda253907b18fad305d799241a'), '3410591882896148000000000')
     assertBn(await antv1.balanceOf('0x03af24a6db8e011b86c32960ec6ede52ae5906fb'), '3000000000000000000000000')
 
     assertBn(await antv2.balanceOf(AA_MULTISIG_ADDRESS), 0)
@@ -193,7 +193,7 @@ contract('ANTv2 migration (pre-deploy mainnet)', ([_, interimOwner, seed]) => {
       // Raw transaction for infinity approveAndCall
       // Already hardcoded with ANTv2Migrator's address
       const calldata =
-        '0xcae9ca51000000000000000000000000b2DbEb75051FF6EaaDc485D1ff10Ff788C0d567Cffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff00000000000000000000000000000000000000000000000000000000000000600000000000000000000000000000000000000000000000000000000000000000'
+        '0xcae9ca51000000000000000000000000078bebc744b819657e1927bf41ab8c74cbbf912dffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff00000000000000000000000000000000000000000000000000000000000000600000000000000000000000000000000000000000000000000000000000000000'
       await antv1.sendTransaction({ from: owner, data: calldata })
 
       assertBn(await antv1.balanceOf(owner), 0, 'antv1: all migrated')
