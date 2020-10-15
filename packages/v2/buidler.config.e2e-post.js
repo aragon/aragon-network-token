@@ -19,7 +19,7 @@ module.exports = {
       // Mainnet RPC URL
       fork: FORK_NODE,
       // Fork block number (may need to be updated if RPC URL is not an archive node)
-      fork_block_number: '11041818',
+      fork_block_number: '11060155',
       // Unlocked accounts that we can "impersonate"
       unlocked_accounts: [...signers, ...holders],
 

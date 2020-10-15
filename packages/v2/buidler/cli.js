@@ -1,7 +1,7 @@
 const inquirer = require('inquirer')
 const { calculateContractAddress } = require('./utils')
 
-async function deploy({ antv1, chain, owner }) {
+async function deploy({ antv1, owner }) {
   if (!web3.utils.isAddress(owner)) {
     console.log('Error: --owner must be an Ethereum address')
     return
@@ -37,7 +37,7 @@ async function deploy({ antv1, chain, owner }) {
   }])
 
   if (confirmed) {
-    await ANTv2.new(chain, migratorAddr),
+    await ANTv2.new(migratorAddr),
     await ANTv2Migrator.new(owner, antv1, antv2Addr)
 
     const deployedANTv2 = await ANTv2.at(antv2Addr)

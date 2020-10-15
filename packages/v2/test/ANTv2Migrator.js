@@ -1,7 +1,6 @@
 const abi = require('web3-eth-abi')
 const { bn, MAX_UINT256, ZERO_ADDRESS } = require('@aragon/contract-helpers-test')
 const { assertBn, assertEvent, assertRevert } = require('@aragon/contract-helpers-test/src/asserts')
-const { CHAIN_ID } = require('./helpers/chain')
 const { tokenAmount } = require('./helpers/tokens')
 
 const ANTv1 = artifacts.require('ANT')
@@ -34,7 +33,7 @@ contract('ANTv2Migrator', ([_, owner, holder1, holder2]) => {
   })
 
   beforeEach('deploy ANTv2', async () => {
-    antv2 = await ANTv2.new(CHAIN_ID, owner)
+    antv2 = await ANTv2.new(owner)
   })
 
   beforeEach('deploy ANTv2Migrator', async () => {
