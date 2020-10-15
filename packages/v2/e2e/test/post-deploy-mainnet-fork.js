@@ -220,7 +220,7 @@ contract('ANTv2 migration (post-deploy mainnet)', ([_, interimOwner, seed, guy])
       })
 
       it('cannot be migrated by others', async () => {
-        await assertRevert(escrowMigrator.migrate({ from: owner }), 'ESCROW_MIG:NOT_MIGRATOR')
+        await assertRevert(escrowMigrator.migrate({ from: owner }), 'ESCROW_MIG:NOT_ALLOWED')
       })
 
       it('can be migrated by designated account', async () => {

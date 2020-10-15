@@ -5,7 +5,7 @@ import './ANTv2Migrator.sol';
 
 
 contract EscrowANTv2Migrator {
-    string private constant ERROR_NOT_MIGRATOR = "ESCROW_MIG:NOT_MIGRATOR";
+    string private constant ERROR_NOT_ALLOWED = "ESCROW_MIG:NOT_ALLOWED";
     string private constant ERROR_NO_BALANCE = "ESCROW_MIG:NO_BALANCE";
     string private constant ERROR_MIGRATION_FAILED = "ESCROW_MIG:MIGRATION_FAILED";
 
@@ -14,18 +14,22 @@ contract EscrowANTv2Migrator {
     ANTv2Migrator public constant antv2Migrator = ANTv2Migrator(0x078BEbC744B819657e1927bF41aB8C74cBBF912D);
 
     address public recipient;
-    address public migrator;
+    address public initiator;
 
-    constructor(address _recipient, address _migrator) public {
+    /**
+    * @param _recipient Recipient of the migrated ANTv2 tokens
+    * @param _initiator Account that can initiate the migration of ANTv1 held in this contract
+    */
+    constructor(address _recipient, address _initiator) public {
         recipient = _recipient;
-        migrator = _migrator;
+        initiator = _initiator;
     }
 
     /**
     * @notice Migrate ANTv1 balance held by this contract into ANTv2 and transfer to recipient
     */
     function migrate() external {
-        require(msg.sender == migrator || migrator == address(0), ERROR_NOT_MIGRATOR);
+        require(msg.sender == initiator || initiator == address(0), ERROR_NOT_ALLOWED);
 
         uint256 balance = antv1.balanceOf(address(this));
         require(balance > 0, ERROR_NO_BALANCE);
