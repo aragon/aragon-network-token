@@ -12,23 +12,22 @@ import './libraries/SafeMath.sol';
 contract ANTv2 is IERC20 {
     using SafeMath for uint256;
 
-    string public constant name = "Aragon Network Token";
-    string public constant symbol = "ANT";
-    uint8 public constant decimals = 18;
-
-    // bytes32 public constant EIP712DOMAIN_HASH =
-    //      keccak256("EIP712Domain(string name,string version,uint256 chainId,address verifyingContract)")
-    bytes32 public constant EIP712DOMAIN_HASH = 0x8b73c3c69bb8fe3d512ecc4cf759cc79239f7b179b0ffacaa9a75d522b39400f;
-    // bytes32 public constant NAME_HASH = keccak256("Aragon Network Token")
-    bytes32 public constant NAME_HASH = 0x711a8013284a3c0046af6c0d6ed33e8bbc2c7a11d615cf4fdc8b1ac753bda618;
-    // bytes32 public constant VERSION_HASH = keccak256("1")
-    bytes32 public constant VERSION_HASH = 0xc89efdaa54c0f20c7adf612882df0950f5a951637e0307cdcb4c672f298b8bc6;
+    // bytes32 private constant EIP712DOMAIN_HASH = keccak256("EIP712Domain(string name,string version,uint256 chainId,address verifyingContract)")
+    bytes32 private constant EIP712DOMAIN_HASH = 0x8b73c3c69bb8fe3d512ecc4cf759cc79239f7b179b0ffacaa9a75d522b39400f;
+    // bytes32 private constant NAME_HASH = keccak256("Aragon Network Token")
+    bytes32 private constant NAME_HASH = 0x711a8013284a3c0046af6c0d6ed33e8bbc2c7a11d615cf4fdc8b1ac753bda618;
+    // bytes32 private constant VERSION_HASH = keccak256("1")
+    bytes32 private constant VERSION_HASH = 0xc89efdaa54c0f20c7adf612882df0950f5a951637e0307cdcb4c672f298b8bc6;
 
     // bytes32 public constant PERMIT_TYPEHASH = keccak256("Permit(address owner,address spender,uint256 value,uint256 nonce,uint256 deadline)");
     bytes32 public constant PERMIT_TYPEHASH = 0x6e71edae12b1b97f4d1f60370fef10105fa2faae0126114a169c64845d6126c9;
     // bytes32 public constant TRANSFER_WITH_AUTHORIZATION_TYPEHASH =
     //     keccak256("TransferWithAuthorization(address from,address to,uint256 value,uint256 validAfter,uint256 validBefore,bytes32 nonce)");
     bytes32 public constant TRANSFER_WITH_AUTHORIZATION_TYPEHASH = 0x7c7c6cdb67a18743f49ec6fa9b35f50d52ed05cbed4cc592e13b44501c1a2267;
+
+    string public constant name = "Aragon Network Token";
+    string public constant symbol = "ANT";
+    uint8 public constant decimals = 18;
 
     address public minter;
     uint256 public totalSupply;
@@ -57,7 +56,7 @@ contract ANTv2 is IERC20 {
         bytes32 digest = keccak256(
             abi.encodePacked(
                 "\x19\x01",
-                domainSeparator(),
+                getDomainSeparator(),
                 encodeData
             )
         );
@@ -102,7 +101,7 @@ contract ANTv2 is IERC20 {
         assembly { chainId := chainid() }
     }
 
-    function domainSeparator() public view returns (bytes32) {
+    function getDomainSeparator() public view returns (bytes32) {
         return keccak256(
             abi.encode(
                 EIP712DOMAIN_HASH,

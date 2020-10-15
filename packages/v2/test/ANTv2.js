@@ -332,7 +332,7 @@ contract('ANTv2', ([_, minter, newMinter, holder1, holder2, newHolder]) => {
         await ant.getChainId(),
         ant.address
       )
-      assert.equal(await ant.domainSeparator(), domainSeparator, 'erc712: domain')
+      assert.equal(await ant.getDomainSeparator(), domainSeparator, 'erc712: domain')
     })
   })
 
@@ -574,7 +574,6 @@ contract('ANTv2', ([_, minter, newMinter, holder1, holder2, newHolder]) => {
     })
 
     it('cannot use expired nonce', async () => {
-      const value = tokenAmount(100)
       const nonce = keccak256('nonce')
       const validAfter = 0
       const validBefore = MAX_UINT256
