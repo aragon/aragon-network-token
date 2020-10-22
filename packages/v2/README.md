@@ -6,7 +6,9 @@ A lightweight token supporting [ERC-2612](https://eips.ethereum.org/EIPS/eip-261
 
 ## Status
 
-🚨 Pre-audit.
+This package is in _preservation_ mode.
+
+ANTv2 was deployed in October 2020.
 
 ## Development
 

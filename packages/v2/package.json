@@ -1,7 +1,6 @@
 {
   "name": "@aragon/network-token-v2",
-  "version": "0.0.1",
-  "private": "true",
+  "version": "1.0.0",
   "description": "Aragon Network Token v2",
   "repository": {
     "type": "git",
@@ -9,12 +8,18 @@
   },
   "author": "Aragon Association <legal@aragon.org>",
   "license": "GPL-3.0-or-later",
+  "files": [
+    "/abi",
+    "/artifacts",
+    "/contracts"
+  ],
   "devDependencies": {
     "@aragon/contract-helpers-test": "^0.1.0",
     "@nomiclabs/buidler": "^1.4.3",
     "@nomiclabs/buidler-ganache": "^1.3.3",
     "@nomiclabs/buidler-truffle5": "^1.3.4",
     "@nomiclabs/buidler-web3": "^1.3.4",
+    "buidler-extract": "^1.0.0",
     "buidler-local-networks-config-plugin": "^0.0.1",
     "chai": "^4.2.0",
     "ethereumjs-util": "^7.0.6",
@@ -25,10 +30,12 @@
     "web3-utils": "^1.2.11"
   },
   "scripts": {
+    "abi:extract": "buidler-extract --output abi/ --keys abi",
     "compile": "buidler compile --force",
     "compile:mocks": "buidler compile --config buidler.config.4.js",
     "test": "yarn compile:mocks && buidler test",
     "test:e2e:pre-deploy": "yarn compile:mocks && buidler --config buidler.config.e2e-pre.js --network ganache test e2e/test/pre-deploy-mainnet-fork.js",
-    "test:e2e:post-deploy": "yarn compile:mocks && buidler --config buidler.config.e2e-post.js --network ganache test e2e/test/post-deploy-mainnet-fork.js"
+    "test:e2e:post-deploy": "yarn compile:mocks && buidler --config buidler.config.e2e-post.js --network ganache test e2e/test/post-deploy-mainnet-fork.js",
+    "prepublishOnly": "yarn compile && yarn abi:extract -- --no-compile"
   }
 }
