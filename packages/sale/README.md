@@ -8,7 +8,7 @@ Smart contracts related to the [Aragon Network Token sale](https://aragon.org/bl
 
 This package is in _preservation_ mode.
 
-Given that the Aragon Network Token sale occurred in May 2017, we have opted to pin dependencies and build tooling to their original form (or as close as possible).
+Given that the Aragon Network Token ("ANTv1") sale occurred in May 2017, we have opted to pin dependencies and build tooling to their original form (or as close as possible).
 
 We therefore specifically target the chain environment and solidity versions used:
 

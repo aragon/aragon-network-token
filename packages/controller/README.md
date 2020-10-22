@@ -1,16 +1,16 @@
-# Aragon Network Token Controller
+# Aragon Network Token V1 Controller
 
 [![Build Status](https://img.shields.io/github/workflow/status/aragon/aragon-network-token/ci:controller?style=flat-square)](https://github.com/aragon/aragon-network-token/actions?query=workflow%3Aci%3Acontroller)
 
-The final, non-changeable controller of the Aragon Network Token.
+The final, non-changeable controller of ANTv1.
 
-Now set as ANT's controller, it limits ANT's token controller related functionality to only allowing a specified address to call `generateTokens()`.
+Set as ANTv1's controller, it limits ANTv1's token controller related functionality to only allowing a specified address to call `generateTokens()`.
 
 ## Status
 
 This package is in _preservation_ mode.
 
-This token controller was deployed and set to be ANT's controller in August 2020.
+This token controller was deployed and set to be ANTv1's controller in August 2020.
 
 ## Development
 
