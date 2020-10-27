@@ -1,7 +1,6 @@
-# Token
+# About ANT
 
-Technical information about the token itself.
+General information about ANT, its uses, and details about the original token sale.
 
-1. [Aragon Network Token](./behaviour.md)
-2. [Non-standard behaviour and gotchas](./non-standard.md)
-3. [Historical token sale resources](./sale-resources.md)
+1. [About the Aragon Network Token](./about.md)
+3. [Historical token sale information](./sale.md)

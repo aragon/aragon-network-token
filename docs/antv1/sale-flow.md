@@ -2,7 +2,7 @@
 
 [Example of a successful testnet sale on Kovan](https://kovan.etherscan.io/address/0x506E1db7DA1B3876eAcd2EdDf6ED551A7F2787D0).
 
-_(Note: gas amounts are calculated for May 2017 and parameters chosen for ANT)_
+_(Note: gas amounts are calculated for May 2017 and parameters chosen for ANTv1)_
 
 ### Instantiation
 
@@ -21,15 +21,15 @@ _(Note: gas amounts are calculated for May 2017 and parameters chosen for ANT)_
 #### 2. `sale.setANT()` – 95,427 gas
 `setANT()` needs to called from the Aragon Multisig. Its parameters are:
 
-- ANT: An empty deployed instance of ANT.
-- ANPlaceholder: An Aragon Network placeholder contract with references to the `AragonTokenSale` and ANT.
+- ANT: An empty deployed instance of ANTv1.
+- ANPlaceholder: An Aragon Network placeholder contract with references to the `AragonTokenSale` and `ANT`.
 - Sale wallet: A contract that holds sale funds until final block.
 
 Aragon Dev will perform `setANT()` immediately after deploying the sale so it is instantiated as soon as possible.
 
 After `deployANT()` has been called, the sale contract will have two public addresses available:
 
-- token: The address of the official MiniMe ERC20 compatible Aragon Network Token.
+- token: The address of the official MiniMe ERC20-compatible ANTv1 token.
 - networkPlaceholder: The placeholder for the Aragon Network until its eventual deployment.
 
 The sale will be the token controller during the sale. After the sale it will be the `networkPlaceholder`.
@@ -92,7 +92,7 @@ The after sale period is considered from the final block (inclusive) until the s
 
 #### 9. `sale.finalizeSale()` – 105,348 gas
 
-This method will mint an additional 3/7 of tokens so at the end of the sale Aragon Dev will own 30% of all the ANT supply.
+This method will mint an additional 3/7 of tokens so at the end of the sale Aragon Dev will own 30% of all the ANTv1 supply.
 
 In the process of doing so, it will make the ANPlaceholder the controller of the token contract. Which will make the token supply be constant until the Aragon Network is deployed and it implements a new minting policy.
 
@@ -100,7 +100,7 @@ In the process of doing so, it will make the ANPlaceholder the controller of the
 
 After the sale is finalized, the Community Multisig will eventually be able to provide the address of an already deployed Aragon Network.
 
-The ANPlaceholder will transfer its Token Controller power of ANT to the deployed Aragon Network, allowing the Network to mint further tokens if the Network's governance decides so.
+The ANPlaceholder will transfer its Token Controller power of ANTv1 to the deployed Aragon Network, allowing the Network to mint further tokens if the Network's governance decides so.
 
 The sale contract is now selfdestructed in favor of the Aragon Network, though it shouldn't have any ether.
 

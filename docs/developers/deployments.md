@@ -1,23 +1,31 @@
-# Historical token sale resources
+# Historical deployments
 
-General information about the token sale and its history can be found in [the wiki](https://wiki.aragon.org/network/aragon_network_token/).
+Log of deployed Ethereum smart contracts related to ANT.
 
-For the purposes of this technical documentation, we will only be concerned with the sale's deployed contract addresses.
+### ANTv2
 
-## Deployments
+Address: [`0xa117000000f279D81A1D3cc75430fAA017FA5A2e`](https://etherscan.io/address/0xa117000000f279d81a1d3cc75430faa017fa5a2e)
 
-### ANT
+The ANTv2 token contract.
+
+### ANTv2Migrator
+
+Address: [`0x078BEbC744B819657e1927bF41aB8C74cBBF912D`](https://etherscan.io/address/0x078BEbC744B819657e1927bF41aB8C74cBBF912D)
+
+The migration contract facilitating the ANTv1 to ANTv2 upgrade.
+
+### ANTv1
 
 Address: [`0x960b236A07cf122663c4303350609A66A7B288C0`](https://etherscan.io/address/0x960b236A07cf122663c4303350609A66A7B288C0)
 
-The ANT token contract.
+The ANTv1 token contract. Now deprecated for ANTv2.
 
 ### ANTController
 
 Address:
 [`0x2443d44325bb07861Cd8C9C8Ba1569b6c39D9d95`](https://etherscan.io/address/0x2443d44325bb07861Cd8C9C8Ba1569b6c39D9d95)
 
-ANT's final, non-changeable controller.
+ANTv1's final, non-changeable controller.
 
 ### AragonTokenSale
 
@@ -35,7 +43,7 @@ The intermediary wallet holding proceeds from the token sale until it was finali
 
 Address: [`0xD39902f046B5885D70e9E66594b65f84D4d1c952`](https://etherscan.io/address/0xd39902f046b5885d70e9e66594b65f84d4d1c952)
 
-The placeholder controller for ANT, replaceable by the [Community Multisig](#community-multisig).
+The placeholder controller for ANTv1, now replaced for `ANTController` by the [Community Multisig](#community-multisig).
 
 ### Aragon Association ("Dev") Multisig
 
