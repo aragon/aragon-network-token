@@ -4,15 +4,25 @@
 
 ## About the Token
 
-- [Current behaviour](token/behaviour.md)
-- [Non-standard behaviours and gotchas](token/non-standard.md)
-- [Historical token sale resources](token/sale-resources.md)
+- [About ANT](token/about.md)
+- [Historical token sale information](token/sale.md)
 
 ## Developers
 
-- [Getting started](developers/getting-started.md)
-- [The MiniMe token](developers/minime.md)
-- [The initial token sale flow](developers/sale-flow.md)
+- [Quick start](developers/quick-start.md)
+- [Integrating ANT](developers/integration.md)
+- [Historical deployments](developers/deployments.md)
+
+## ANTv1
+
+- [Upgrading to ANTv2](antv1/upgrade.md)
+  - [Upgrade portal](antv1/upgrade-portal.md)
+  - [Contract interaction](antv1/upgrade-contract-interaction.md)
+  - [Migrating on-chain liquidity](antv1/upgrade-migrating-liquidity.md)
+- [Token behaviour](antv1/behaviour.md)
+- [Non-standard behaviours and gotchas](antv1/non-standard.md)
+- [About the MiniMe token](antv1/minime.md)
+- [The initial token sale flow](antv1/sale-flow.md)
 
 ## Security
 
