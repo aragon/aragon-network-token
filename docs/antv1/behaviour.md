@@ -1,4 +1,4 @@
-# ANTv1 token behaviour
+# ANTv1: Token behaviour
 
 **👉 Important information**:
 
@@ -29,7 +29,7 @@ And finally, a specific behaviour was added for the initial launch period:
 
 ## Controller
 
-The controller of a MiniMe token holds significant power over the token itself (more information available in the [MiniMe section](./minime#optional-token-controller)).
+The controller of a MiniMe token holds significant power over the token itself (more information available in the [MiniMe section](minime.md#optional-token-controller)).
 
 The current controller of ANT is a **final, non-changeable** contract, [`ANTController`](https://etherscan.io/address/0x2443d44325bb07861Cd8C9C8Ba1569b6c39D9d95#code). This contract limits the token controller related function of ANT to only allowing a specified address to call `generateTokens()`.
 

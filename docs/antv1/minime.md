@@ -1,4 +1,4 @@
-# About the MiniMe token
+# ANTv1: About the MiniMe token
 
 ANTv1 is an instance of a MiniMe token.
 
