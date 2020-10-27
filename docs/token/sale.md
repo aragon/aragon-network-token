@@ -28,4 +28,4 @@ The public token sale was conducted through a single `AragonTokenSale` contract 
 - Aragon Association ("Dev") multisig: [`0xcafE1A77e84698c83CA8931F54A755176eF75f2C`](https://etherscan.io/address/0xcafe1a77e84698c83ca8931f54a755176ef75f2c)
 - Community multisig: [`0xbEEFbEeF03c7E5a1C29E0Aa675f8E16AEe0A5FAd`](https://etherscan.io/address/0xbeefbeef03c7e5a1c29e0aa675f8e16aee0a5fad)
 
-For a comprehensive list of Ethereum smart contracts supporting the original token sale, please see [Developers - Historical deployments](../developers/deployments).
+For a comprehensive list of Ethereum smart contracts supporting the original token sale, please see [Developers - Historical deployments](../developers/deployments.md).
