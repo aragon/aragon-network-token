@@ -15,6 +15,8 @@ Then, use [any of the upgrade paths](upgrade.md) to upgrade the ANTv1 in your wa
 
 Finally, you can now add liquidity to the equivalent (or new) ANTv2 pools on Uniswap. You can use [ANTv2's Uniswap analytics page](https://info.uniswap.org/token/0xa117000000f279d81a1d3cc75430faa017fa5a2e) to find ANTv2's liquidity pools.
 
+The equivalent ANTv2/ETH pool to the original ANTv1/ETH pool is [`0x9dEF9511fEc79f83AFCBFfe4776B1D817DC775aE`](https://info.uniswap.org/pair/0x9def9511fec79f83afcbffe4776b1d817dc775ae).
+
 ## Balancer
 
 First, withdraw any ANTv1 liquidity you've provided. For example, from the [ANTv1/WETH 80:20 pool](https://pools.balancer.exchange/#/pool/0x2cf9106faf2c5c8713035d40df655fb1b9b0f9b9/):
@@ -24,3 +26,5 @@ First, withdraw any ANTv1 liquidity you've provided. For example, from the [ANTv
 Then, use [any of the upgrade paths](./upgrade) to upgrade the ANTv1 in your wallet to ANTv2.
 
 Finally, you can now add liquidity to the equivalent (or new) ANTv2 pools on Balancer. You can use [Balancer's ANTv2 pools page](https://pools.balancer.exchange/#/?token=0xa117000000f279d81a1d3cc75430faa017fa5a2e&filter=1) to find ANTv2's liquidity pools.
+
+At the moment there is an equivalent [ANTv2/WETH 80:20 pool](https://pools.balancer.exchange/#/pool/0xcd25584fe1f7ea61d3aa84d2248fb9c2b953c71b) and a new [ANTv2/USDC 80:20 pool](https://pools.balancer.exchange/#/pool/0x0d6dd41c015b16badbd8de64f0b8e27133d78296/).
