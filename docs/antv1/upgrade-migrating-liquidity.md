@@ -11,7 +11,7 @@ First, withdraw any ANTv1 liquidity you've provided. For example, from the [ANTv
 
 ![Withdraw liquidity from ANTv1/ETH UniswapV2](./assets/upgrade-remove-uniswap.png)
 
-Then, use [any of the upgrade paths](./upgrade) to upgrade the ANTv1 in your wallet to ANTv2.
+Then, use [any of the upgrade paths](upgrade.md) to upgrade the ANTv1 in your wallet to ANTv2.
 
 Finally, you can now add liquidity to the equivalent (or new) ANTv2 pools on Uniswap. You can use [ANTv2's Uniswap analytics page](https://info.uniswap.org/token/0xa117000000f279d81a1d3cc75430faa017fa5a2e) to find ANTv2's liquidity pools.
 
