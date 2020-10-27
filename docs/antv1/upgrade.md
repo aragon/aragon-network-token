@@ -47,7 +47,7 @@ The available upgrade paths for ANTv1 held in Aragon DAOs depends on whether the
 **If the DAO has the Agent app installed**, you will be able to directly upgrade the ANTv1 through an Agent transaction. You can accomplish by connecting [Frame](http://frame.sh/) to your DAO and using the Upgrade Portal, using the in-app console with a raw call, or aragonCLI with a raw call.
 
 For those latter options, please understand the [contract interaction
-page](upgrade-contract-interaction.md), and use the `exec` command with the appropriate arguments for an `approveAndCall()` interaction.
+page](upgrade-contract-interaction.md), and use the `act` command with the appropriate arguments for an `approveAndCall()` interaction.
 
 **If the DAO does not have the Agent app installed**, your options for upgrading the ANTv1 become limited to:
 
