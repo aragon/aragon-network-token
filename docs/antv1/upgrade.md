@@ -1,8 +1,8 @@
 # Upgrading to ANTv2
 
-**[ANT is upgrading to ANTv2](https://aragon.org/blog/antv2)!**
+**[ANT is upgrading to ANTv2](https://aragon.org/blog/antv2) 🦅 !**
 
-The original ANT ([`0x960b236A07cf122663c4303350609A66A7B288C0`](https://etherscan.io/address/0x960b236A07cf122663c4303350609A66A7B288C0)), now known affectionately as "ANTv1" (or sometimes as "ANT (old)") has been deprecated in favour of ANTv2 ([`0xa117000000f279D81A1D3cc75430fAA017FA5A2e`](https://etherscan.io/address/0xa117000000f279d81a1d3cc75430faa017fa5a2e), now "ANT"). Future governance decisions related to the Aragon Network will use ANTv2.
+The original ANT ([`0x960b...88C0`](https://etherscan.io/address/0x960b236A07cf122663c4303350609A66A7B288C0)), now known affectionately as "ANTv1" (or sometimes as "ANT (old)") has been deprecated in favour of ANTv2 ([`0xa117...5A2e`](https://etherscan.io/address/0xa117000000f279d81a1d3cc75430faa017fa5a2e), now "ANT"). Future governance decisions related to the Aragon Network will use ANTv2.
 
 {% hint style="info" %}
 If you directly hold ANT, the easiest method of upgrading your ANTv1 is to use the [Upgrade Portal](https://upgrade.aragon.org).

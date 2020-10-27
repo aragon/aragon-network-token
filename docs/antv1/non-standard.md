@@ -1,4 +1,4 @@
-# ANTv1 non-standard behaviour and gotchas
+# ANTv1: Non-standard behaviour and gotchas
 
 Some specific behaviours encoded into ANTv1 may be useful to be aware of, even when not programmatically interacting with the contract.
 
