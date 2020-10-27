@@ -27,4 +27,4 @@ Then, use [any of the upgrade paths](./upgrade) to upgrade the ANTv1 in your wal
 
 Finally, you can now add liquidity to the equivalent (or new) ANTv2 pools on Balancer. You can use [Balancer's ANTv2 pools page](https://pools.balancer.exchange/#/?token=0xa117000000f279d81a1d3cc75430faa017fa5a2e&filter=1) to find ANTv2's liquidity pools.
 
-At the moment there is an equivalent [ANTv2/WETH 80:20 pool](https://pools.balancer.exchange/#/pool/0xcd25584fe1f7ea61d3aa84d2248fb9c2b953c71b) and a new [ANTv2/USDC 80:20 pool](https://pools.balancer.exchange/#/pool/0x0d6dd41c015b16badbd8de64f0b8e27133d78296/).
+At the moment there is an equivalent [ANTv2/WETH 80:20 pool](https://pools.balancer.exchange/#/pool/0x73eba399fbbea50852359ff8b8d0e3eba1f22500/) and a new [ANTv2/USDC 80:20 pool](https://pools.balancer.exchange/#/pool/0xde0999ee4e4bea6fecb03bf4ebef2626942ec6f5/).
