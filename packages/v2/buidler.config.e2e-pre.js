@@ -16,9 +16,9 @@ module.exports = {
   networks: {
     // Configuration for Ganache-based fork of mainnet
     ganache: {
-      // Mainnet RPC URL
+      // // Mainnet RPC URL
       fork: FORK_NODE,
-      // Fork block number (may need to be updated if RPC URL is not an archive node)
+      // // Fork block number (may need to be updated if RPC URL is not an archive node)
       fork_block_number: '11035036',
       // Unlocked accounts that we can "impersonate"
       unlocked_accounts: [...signers, ...holders],

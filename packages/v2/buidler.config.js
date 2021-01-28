@@ -1,5 +1,7 @@
 const { types, usePlugin } = require('@nomiclabs/buidler/config')
 const { deploy } = require('./buidler/cli')
+const { deployOnTestnet } = require('./deploy/deploy-testnet')
+const { deployOnMainnet } = require('./deploy/deploy-mainnet')
 
 usePlugin("@nomiclabs/buidler-ganache")
 usePlugin('@nomiclabs/buidler-truffle5')
@@ -9,6 +11,16 @@ task('deploy', 'Deploy ANTv2 and migrator')
   .addParam('owner', "The migrator's owner")
   .addOptionalParam('antv1', 'The ANTv1 address to use', '0x960b236A07cf122663c4303350609A66A7B288C0')
   .setAction(deploy)
+
+
+task('deploy-testnet', 'This deploys every single contract(ANJ, ANTv1, ANTv2, ANTv2Migrator, ANJNoLockMinter, ANTv2MultiMinter.sol')
+  .setAction(deployOnTestnet)
+
+task('deploy-mainnet', 'This deploys every single contract(ANJNoLockMinter, ANTv2MultiMinter.sol')
+  .setAction(deployOnMainnet)
+
+
+const RINKEBY_PRIVATE_KEY =  process.env.PRIVATE_KEY;
 
 module.exports = {
   networks: {
@@ -28,6 +40,7 @@ module.exports = {
     // Rinkeby network configured with Aragon node.
     rinkeby: {
       url: 'https://rinkeby.eth.aragon.network',
+      accounts: [`0x${RINKEBY_PRIVATE_KEY}`]
     },
     // Network configured to interact with Frame wallet. Requires
     // to have Frame running on your machine. Download it from:

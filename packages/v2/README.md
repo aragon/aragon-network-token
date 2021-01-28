@@ -48,6 +48,23 @@ Tests a deployed instance of `ANTv2` and `ANTv2Migrator` on mainnet with mainnet
 
 See [the `buidler.config.e2e-post.js` configuration](buidler.config.e2e.js) for more information about the fork's configuration.
 
+
+### Rinkeby Network Addresses
+
+**tokenAntV1:** '0x59f24735b61e6ef7E5A52F5F7bB708D1c0141C5A',
+**tokenAntV2:** '0xf0f8D83CdaB2F9514bEf0319F1b434267be36B5c',
+**tokenAnj:** '0x96286BbCac30Cef8dCB99593d0e28Fabe95F3572',
+**ANTv2Migrator:** '0xF45C53D13bF1F5f757E3331e258589a6f30e662F',
+**ANJNoLockMinter:** '0xEE25745890bc04bCF926436Ef3Ce490089d89F05',
+**ANTv2MultiMinter**: 0xF64bf861b8A85927FAdd9724E80C2987f82a9259
+
+**Deployed By** : 0x94C34FB5025e054B24398220CBDaBE901bd8eE5e
+
+
+* ANTv2's minter can only be changed by ANTv2MultiMinter.
+* ANJNoLockMinter is added as one of the minters in ANTv2MultiMinter.
+
+
 ## Credits
 
 - UNI-LP: Uniswap
