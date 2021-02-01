@@ -20,7 +20,7 @@ task('deploy-mainnet', 'This deploys every single contract(ANJNoLockMinter, ANTv
   .setAction(deployOnMainnet)
 
 
-const RINKEBY_PRIVATE_KEY =  process.env.PRIVATE_KEY;
+const PRIVATE_KEY =  process.env.PRIVATE_KEY;
 
 module.exports = {
   networks: {
@@ -29,18 +29,20 @@ module.exports = {
     // of accounts.
     // https://github.com/trufflesuite/ganache-core#options
     ganache: {
-      url: 'http://localhost:8545',
+      url: 'http://localhost:7545',
       gasLimit: 6000000000,
       defaultBalanceEther: 100
     },
     // Mainnet network configured with Aragon node.
     mainnet: {
       url: 'https://mainnet.eth.aragon.network',
+      accounts: [`0x${PRIVATE_KEY}`]
     },
     // Rinkeby network configured with Aragon node.
     rinkeby: {
       url: 'https://rinkeby.eth.aragon.network',
-      accounts: [`0x${RINKEBY_PRIVATE_KEY}`]
+      accounts: [`0x${PRIVATE_KEY}`],
+
     },
     // Network configured to interact with Frame wallet. Requires
     // to have Frame running on your machine. Download it from:
