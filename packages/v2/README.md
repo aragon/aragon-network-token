@@ -58,7 +58,18 @@ See [the `buidler.config.e2e-post.js` configuration](buidler.config.e2e.js) for 
 **ANJNoLockMinter:** '0xEE25745890bc04bCF926436Ef3Ce490089d89F05',
 **ANTv2MultiMinter**: 0xF64bf861b8A85927FAdd9724E80C2987f82a9259
 
-**Deployed By** : 0x94C34FB5025e054B24398220CBDaBE901bd8eE5e
+**Deployed By** : 0x94C34FB5025e054B24398220CBDaBE901bd8eE5e (Giorgi)
+
+### Mainnet Network Addresses
+
+**tokenAntV1:** '0x960b236A07cf122663c4303350609A66A7B288C0',
+**tokenAntV2:** '0xa117000000f279D81A1D3cc75430fAA017FA5A2e',
+**tokenAnj:** '0xcD62b1C403fa761BAadFC74C525ce2B51780b184',
+**ANTv2Migrator:** '0x078BEbC744B819657e1927bF41aB8C74cBBF912D',
+**ANJNoLockMinter:** '0xc02216cE9Fb7a5Fe22768744332D0B12aBa12a31',
+**ANTv2MultiMinter**: 0xA693F70231Eb6de95C6085f330AD40Af66b54F2E
+
+**Deployed By** : 0x9416C2191B49bC4E1E614f7d63035b294Ad30D19 (Samuel)
 
 
 * ANTv2's minter can only be changed by ANTv2MultiMinter.
