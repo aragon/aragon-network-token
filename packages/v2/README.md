@@ -66,8 +66,8 @@ See [the `buidler.config.e2e-post.js` configuration](buidler.config.e2e.js) for 
 **tokenAntV2:** '0xa117000000f279D81A1D3cc75430fAA017FA5A2e',
 **tokenAnj:** '0xcD62b1C403fa761BAadFC74C525ce2B51780b184',
 **ANTv2Migrator:** '0x078BEbC744B819657e1927bF41aB8C74cBBF912D',
-**ANJNoLockMinter:** '0xc02216cE9Fb7a5Fe22768744332D0B12aBa12a31',
-**ANTv2MultiMinter**: 0xA693F70231Eb6de95C6085f330AD40Af66b54F2E
+**ANJNoLockMinter:** '0xf6271c8eBF1C1C0384CBBD6Df8b84380623555Ef',
+**ANTv2MultiMinter**: 0xdFf202A4238458bF49A1eeE7Bc5582A45bbe0e38
 
 **Deployed By** : 0x9416C2191B49bC4E1E614f7d63035b294Ad30D19 (Samuel)
 
@@ -80,3 +80,7 @@ See [the `buidler.config.e2e-post.js` configuration](buidler.config.e2e.js) for 
 
 - UNI-LP: Uniswap
 - SafeMath: DappHub
+
+
+
+1. containerHash => 

@@ -1,5 +1,3 @@
-const { bigExp } = require('@aragon/contract-helpers-test')
-
 
 async function deployOnMainnet({ deploy }) {
 
@@ -22,7 +20,6 @@ async function deployOnMainnet({ deploy }) {
 
     // This can be done only by the owner that we passed when creating ANTv2MultiMinter. Can be changed by changeOwner...
     await ANTv2MultiMinterInstance.addMinter(ANJNoLockMinterInstance.address);
-    await ANTv2MultiMinterInstance.addMinter(MultiSigAddress);
 
     // This will not work from the current deployer, This action can be only done by one of the owners from multisig.
     // const changeMinterData = ANTv2Instance.contract.methods.changeMinter(ANTv2MultiMinterInstance.address).encodeABI();
@@ -36,7 +33,6 @@ async function deployOnMainnet({ deploy }) {
 }   
 
 
-// before 9.2832 now 
 module.exports = {
     deployOnMainnet
 }

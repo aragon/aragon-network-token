@@ -25,6 +25,7 @@
     "ethereumjs-util": "^7.0.6",
     "inquirer": "^7.3.3",
     "rlp": "^2.2.6",
+    "truffle-flattener": "^1.5.0",
     "web3": "^1.2.11",
     "web3-eth-abi": "^1.2.11",
     "web3-utils": "^1.2.11"
