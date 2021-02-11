@@ -51,23 +51,23 @@ See [the `buidler.config.e2e-post.js` configuration](buidler.config.e2e.js) for 
 
 ### Rinkeby Network Addresses
 
-* **tokenAntV1:** ['0x59f24735b61e6ef7E5A52F5F7bB708D1c0141C5A'](https://rinkeby.etherscan.io/address/0x59f24735b61e6ef7e5a52f5f7bb708d1c0141c5a)
-* **tokenAntV2:** ['0xf0f8D83CdaB2F9514bEf0319F1b434267be36B5c'](https://rinkeby.etherscan.io/address/0xf0f8d83cdab2f9514bef0319f1b434267be36b5c),
-* **tokenAnj:** ['0x96286BbCac30Cef8dCB99593d0e28Fabe95F3572'](https://rinkeby.etherscan.io/address/0x96286BbCac30Cef8dCB99593d0e28Fabe95F3572),
-* **ANTv2Migrator:** ['0xF45C53D13bF1F5f757E3331e258589a6f30e662F'](https://rinkeby.etherscan.io/address/0xF45C53D13bF1F5f757E3331e258589a6f30e662F),
-* **ANJNoLockMinter:** ['0xEE25745890bc04bCF926436Ef3Ce490089d89F05'](https://rinkeby.etherscan.io/address/0xEE25745890bc04bCF926436Ef3Ce490089d89F05),
-* **ANTv2MultiMinter**: ['0xF64bf861b8A85927FAdd9724E80C2987f82a9259'](https://rinkeby.etherscan.io/address/0xF64bf861b8A85927FAdd9724E80C2987f82a9259)
+* **ANTv1:** [0x59f24735b61e6ef7E5A52F5F7bB708D1c0141C5A](https://rinkeby.etherscan.io/address/0x59f24735b61e6ef7e5a52f5f7bb708d1c0141c5a)
+* **ANTv2:** [0xf0f8D83CdaB2F9514bEf0319F1b434267be36B5c](https://rinkeby.etherscan.io/address/0xf0f8d83cdab2f9514bef0319f1b434267be36b5c)
+* **ANJ:** [0x96286BbCac30Cef8dCB99593d0e28Fabe95F3572](https://rinkeby.etherscan.io/address/0x96286BbCac30Cef8dCB99593d0e28Fabe95F3572)
+* **ANTv2Migrator:** [0xF45C53D13bF1F5f757E3331e258589a6f30e662F](https://rinkeby.etherscan.io/address/0xF45C53D13bF1F5f757E3331e258589a6f30e662F)
+* **ANJNoLockMinter:** [0xEE25745890bc04bCF926436Ef3Ce490089d89F05](https://rinkeby.etherscan.io/address/0xEE25745890bc04bCF926436Ef3Ce490089d89F05)
+* **ANTv2MultiMinter**: [0xF64bf861b8A85927FAdd9724E80C2987f82a9259](https://rinkeby.etherscan.io/address/0xF64bf861b8A85927FAdd9724E80C2987f82a9259)
 
 **Deployed By** : 0x94C34FB5025e054B24398220CBDaBE901bd8eE5e (Giorgi)
 
 ### Mainnet Network Addresses
 
-* **tokenAntV1:** ['0x960b236A07cf122663c4303350609A66A7B288C0'](https://etherscan.io/address/0x960b236a07cf122663c4303350609a66a7b288c0),
-* **tokenAntV2:** ['0xa117000000f279D81A1D3cc75430fAA017FA5A2e'](https://etherscan.io/address/0xa117000000f279D81A1D3cc75430fAA017FA5A2e),
-* **tokenAnj:** ['0xcD62b1C403fa761BAadFC74C525ce2B51780b184'](https://etherscan.io/address/0xcD62b1C403fa761BAadFC74C525ce2B51780b184),
-* **ANTv2Migrator:** ['0x078BEbC744B819657e1927bF41aB8C74cBBF912D'](https://etherscan.io/address/0x078BEbC744B819657e1927bF41aB8C74cBBF912D),
-* **ANJNoLockMinter:** ['0xf6271c8eBF1C1C0384CBBD6Df8b84380623555Ef'](https://etherscan.io/address/0xf6271c8eBF1C1C0384CBBD6Df8b84380623555Ef),
-* **ANTv2MultiMinter**: ['0xdFf202A4238458bF49A1eeE7Bc5582A45bbe0e38'](https://etherscan.io/address/0xdFf202A4238458bF49A1eeE7Bc5582A45bbe0e38)
+* **ANTv1:** [0x960b236A07cf122663c4303350609A66A7B288C0](https://etherscan.io/address/0x960b236a07cf122663c4303350609a66a7b288c0)
+* **ANTv2:** [0xa117000000f279D81A1D3cc75430fAA017FA5A2e](https://etherscan.io/address/0xa117000000f279D81A1D3cc75430fAA017FA5A2e)
+* **ANJ:** [0xcD62b1C403fa761BAadFC74C525ce2B51780b184](https://etherscan.io/address/0xcD62b1C403fa761BAadFC74C525ce2B51780b184)
+* **ANTv2Migrator:** [0x078BEbC744B819657e1927bF41aB8C74cBBF912D](https://etherscan.io/address/0x078BEbC744B819657e1927bF41aB8C74cBBF912D)
+* **ANJNoLockMinter:** [0xf6271c8eBF1C1C0384CBBD6Df8b84380623555Ef](https://etherscan.io/address/0xf6271c8eBF1C1C0384CBBD6Df8b84380623555Ef)
+* **ANTv2MultiMinter**: [0xdFf202A4238458bF49A1eeE7Bc5582A45bbe0e38](https://etherscan.io/address/0xdFf202A4238458bF49A1eeE7Bc5582A45bbe0e38)
 
 **Deployed By** : 0x9416C2191B49bC4E1E614f7d63035b294Ad30D19 (Samuel)
 
