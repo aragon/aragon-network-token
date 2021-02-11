@@ -42,7 +42,6 @@ module.exports = {
     rinkeby: {
       url: 'https://rinkeby.eth.aragon.network',
       accounts: [`0x${PRIVATE_KEY}`],
-
     },
     // Network configured to interact with Frame wallet. Requires
     // to have Frame running on your machine. Download it from:
