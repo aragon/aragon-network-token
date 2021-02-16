@@ -3,6 +3,7 @@ const { deploy } = require('./buidler/cli')
 const { deployOnTestnet } = require('./deploy/deploy-testnet')
 const { deployOnMainnet } = require('./deploy/deploy-mainnet')
 
+
 usePlugin("@nomiclabs/buidler-ganache")
 usePlugin('@nomiclabs/buidler-truffle5')
 usePlugin('buidler-local-networks-config-plugin')
@@ -13,14 +14,14 @@ task('deploy', 'Deploy ANTv2 and migrator')
   .setAction(deploy)
 
 
-task('deploy-testnet', 'This deploys every single contract(ANJ, ANTv1, ANTv2, ANTv2Migrator, ANJNoLockMinter, ANTv2MultiMinter.sol')
+task('deploy-testnet', 'This deploys the following contracts(ANJ, ANTv1, ANTv2, ANTv2Migrator, ANJNoLockMinter, ANTv2MultiMinter.sol')
   .setAction(deployOnTestnet)
 
-task('deploy-mainnet', 'This deploys every single contract(ANJNoLockMinter, ANTv2MultiMinter.sol')
+task('deploy-mainnet', 'This deploys the following contracts(ANJNoLockMinter, ANTv2MultiMinter.sol')
   .setAction(deployOnMainnet)
 
 
-const PRIVATE_KEY =  process.env.PRIVATE_KEY;
+const PRIVATE_KEY =  "";
 
 module.exports = {
   networks: {
