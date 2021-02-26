@@ -6,7 +6,7 @@ For more information about Aragon-related security and contact information, plea
 
 ### V2
 
-[Coinspect](https://coinspect.com/) conducted a security audit for ANTv2 in October 2020. [See report](security/audits/v2-2020-10.pdf).
+[Coinspect](https://coinspect.com/) conducted a security audit for ANTv2 in October 2020. [See report](security/v2-2020-10.pdf).
 
 ### Sale
 
@@ -18,4 +18,4 @@ Numerous audits were conducted for the original Aragon Network Token sale. These
 
 ### V1 Controller
 
-[Coinspect](https://coinspect.com/) conducted a security audit for ANTv1's final ANT controller in August 2020. [See report](security/audits/v1controller-2020-08.pdf).
+[Coinspect](https://coinspect.com/) conducted a security audit for ANTv1's final ANT controller in August 2020. [See report](security/v1controller-2020-08.pdf).
