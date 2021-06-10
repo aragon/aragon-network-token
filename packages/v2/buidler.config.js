@@ -36,12 +36,12 @@ module.exports = {
     },
     // Mainnet network configured with Aragon node.
     mainnet: {
-      url: 'https://mainnet.eth.aragon.network',
+      url: 'https://mainnet.infura.io/v3/7a03fcb37be7479da06f92c5117afd47',
       accounts: [`0x${PRIVATE_KEY}`]
     },
     // Rinkeby network configured with Aragon node.
     rinkeby: {
-      url: 'https://rinkeby.eth.aragon.network',
+      url: 'https://rinkeby.infura.io/v3/7a03fcb37be7479da06f92c5117afd47',
       accounts: [`0x${PRIVATE_KEY}`],
     },
     // Network configured to interact with Frame wallet. Requires
