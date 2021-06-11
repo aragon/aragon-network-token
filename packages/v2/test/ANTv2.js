@@ -1,7 +1,8 @@
 const { ecsign, ecrecover } = require('ethereumjs-util')
 const { keccak256 } = require('web3-utils')
 const { bn, MAX_UINT256, ZERO_ADDRESS } = require('@aragon/contract-helpers-test')
-const { assertBn, assertEvent, assertRevert } = require('@aragon/contract-helpers-test/src/asserts')
+const { assertBn, assertEvent } = require('@aragon/contract-helpers-test/src/asserts')
+const { assertRevert } = require("./helpers/assert");
 const { createDomainSeparator } = require('./helpers/erc712')
 const { createPermitDigest, PERMIT_TYPEHASH } = require('./helpers/erc2612')
 const { createTransferWithAuthorizationDigest, TRANSFER_WITH_AUTHORIZATION_TYPEHASH } = require('./helpers/erc3009')
