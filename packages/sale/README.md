@@ -23,6 +23,8 @@ yarn install
 yarn test
 ```
 
+## CI
+
 CI for this package is run through the [`ci_sale` Github action](../../.github/workflows/ci_sale.yml).
 
 ## Credits
