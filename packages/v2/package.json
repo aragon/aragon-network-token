@@ -25,6 +25,7 @@
     "ethereumjs-util": "^7.0.6",
     "inquirer": "^7.3.3",
     "rlp": "^2.2.6",
+    "truffle-flattener": "^1.5.0",
     "web3": "^1.2.11",
     "web3-eth-abi": "^1.2.11",
     "web3-utils": "^1.2.11"
@@ -36,6 +37,9 @@
     "test": "yarn compile:mocks && buidler test",
     "test:e2e:pre-deploy": "yarn compile:mocks && buidler --config buidler.config.e2e-pre.js --network ganache test e2e/test/pre-deploy-mainnet-fork.js",
     "test:e2e:post-deploy": "yarn compile:mocks && buidler --config buidler.config.e2e-post.js --network ganache test e2e/test/post-deploy-mainnet-fork.js",
-    "prepublishOnly": "yarn compile && yarn abi:extract -- --no-compile"
+    "prepublishOnly": "yarn compile && yarn abi:extract -- --no-compile",
+    "deploy-ganache": "yarn compile && yarn compile:mocks && buidler --config buidler.config.js --network ganache deploy-testnet",
+    "deploy-rinkeby": "yarn compile && yarn compile:mocks && buidler --config buidler.config.js --network rinkeby deploy-testnet",
+    "deploy-mainnet": "yarn compile && yarn compile:mocks && buidler --config buidler.config.js --network mainnet deploy-mainnet"
   }
 }

@@ -391,6 +391,7 @@ contract MiniMeToken is ERC20, Controlled {
     ) returns (bool success) {
         approve(_spender, _amount);
 
+        
         // This portion is copied from ConsenSys's Standard Token Contract. It
         //  calls the receiveApproval function that is part of the contract that
         //  is being approved (`_spender`). The function should look like:
@@ -924,3 +925,21 @@ contract ANT is MiniMeIrrevocableVestedToken {
     true                    // Enable transfers
     ) {}
 }
+
+
+contract ANJ is MiniMeIrrevocableVestedToken {
+  // @dev ANT constructor just parametrizes the MiniMeIrrevocableVestedToken constructor
+  function ANJ(
+    address _tokenFactory
+  ) MiniMeIrrevocableVestedToken(
+    _tokenFactory,
+    0x0,                    // no parent token
+    0,                      // no snapshot block number from parent
+    "Aragon ANJ Token", // Token name
+    18,                     // Decimals
+    "ANJ",                  // Symbol
+    true                    // Enable transfers
+    ) {}
+}
+
+

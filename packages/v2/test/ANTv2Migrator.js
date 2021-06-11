@@ -1,7 +1,8 @@
 const abi = require('web3-eth-abi')
 const { bn, MAX_UINT256, ZERO_ADDRESS } = require('@aragon/contract-helpers-test')
-const { assertBn, assertEvent, assertRevert } = require('@aragon/contract-helpers-test/src/asserts')
+const { assertBn, assertEvent } = require("@aragon/contract-helpers-test/src/asserts");
 const { tokenAmount } = require('./helpers/tokens')
+const { assertRevert } = require("./helpers/assert");
 
 const ANTv1 = artifacts.require('ANT')
 const ANTv2 = artifacts.require('ANTv2')
