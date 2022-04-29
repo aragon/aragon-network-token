@@ -10,7 +10,7 @@
   "author": "Aragon Association <legal@aragon.org>",
   "license": "GPL-3.0-or-later",
   "devDependencies": {
-    "async": "^2.4.0",
+    "async": "^2.6.4",
     "ganache-cli": "^6.10.1",
     "moment": "^2.18.1",
     "truffle": "3.2.1"
